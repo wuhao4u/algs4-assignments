@@ -8,10 +8,12 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
 
 //    private HashMap gridHM;
-    private boolean grid[][];
+    private boolean grid[][] = new boolean[0][0];
 //    private QuickFindUF qfGrid;
-    private WeightedQuickUnionUF qfGrid, qfGridDraw;
-    private int gridSize = -1;
+    private WeightedQuickUnionUF qfGrid = new WeightedQuickUnionUF(0),
+        qfGridDraw = new WeightedQuickUnionUF(0);
+    private static int gridSize;
+    private int openSitesCount = 0;
 
     // union find operations
     // Performance requirements. The constructor should take time proportional to n2;
@@ -26,6 +28,7 @@ public class Percolation {
         }
 
         gridSize = n;
+        openSitesCount = 0;
         grid = new boolean[n][n];
 //        qfGrid = new QuickFindUF(n * n + 2);
         qfGrid = new WeightedQuickUnionUF(n * n + 2);
@@ -34,7 +37,7 @@ public class Percolation {
 
     // UTILITY functions
     // row, col starts with 1
-    private boolean inGrid(int r1, int c1) {
+    private static boolean inGrid(int r1, int c1) {
         if (r1 < 1 || r1 > gridSize) {
             return false;
         } else if (c1 < 1 || c1 > gridSize) {
@@ -45,9 +48,17 @@ public class Percolation {
     }
 
     // row, col starts with 1
-    private int getSiteIndex(int r1, int c1) {
+    public static int getSiteIndex(int r1, int c1) {
         return (r1 - 1) * gridSize + c1;
     }
+
+    // index is between [0, n*n)
+//    public static int[] getRowCol(int index) {
+//        int r1 = index / gridSize + 1;
+//        int c1 = index - r1 * gridSize;
+//        int[] ret = {r1, c1 + 1};
+//        return ret;
+//    }
 
     // open site (row, col) if it is not open already
     // passed in row & col starts at 1
@@ -105,6 +116,8 @@ public class Percolation {
                     qfGridDraw.union(currentSiteIndex, rightIndex);
                 }
             }
+
+            openSitesCount++;
         }
     }
 
@@ -114,7 +127,8 @@ public class Percolation {
         int c0 = c1 - 1;
 
         if (!inGrid(r1, c1)) {
-            throw new IndexOutOfBoundsException("Index does not exist while calling isOpen.");
+            throw new IndexOutOfBoundsException("Index does not exist while calling isOpen. "
+            + r1 + ' ' + c1);
         }
 
         return grid[r0][c0];
@@ -158,6 +172,7 @@ public class Percolation {
 
     // number of open sites
     public int numberOfOpenSites() {
+        /*
         int ret = 0;
         for (int r = 0; r < gridSize; ++r) {
             for (int c = 0; c < gridSize; ++c) {
@@ -166,6 +181,8 @@ public class Percolation {
             }
         }
         return ret;
+        */
+        return openSitesCount;
     }
 
     // does the system percolate?
@@ -180,7 +197,6 @@ public class Percolation {
             }
         }
 
-        // TODO: fix back wash problem
         // add virtual bottom sites to the grid n*n
         int virtualBottomIndex = gridSize * gridSize + 1;
         for (int j = 1; j <= gridSize; ++j) {
