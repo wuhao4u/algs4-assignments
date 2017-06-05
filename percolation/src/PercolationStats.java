@@ -2,18 +2,14 @@
  * Created by wuhao on 2017-06-01.
  */
 
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
     // perform trials independent experiments on an n-by-n grid
-
-    //    int[] xOpenSites; // number of open sites when perculate
-//    double[] xProb; // xOpenSites / total sites
-    int gridSize, totalSites, mTrials;
-    double mean, stddev, confidenceLo, confidenceHi;
+    private int totalSites, mTrials;
+    private double mean, stddev, confidenceLo, confidenceHi;
 
     // n: size of the grid
     // trails: number of times of the percolation tests
@@ -24,9 +20,7 @@ public class PercolationStats {
 
         int[] xOpenSites = new int[trials];
         double[] xProb = new double[trials];
-        StdRandom.setSeed(System.currentTimeMillis());
 
-        gridSize = n;
         mTrials = trials;
         totalSites = n * n;
         int randRow, randCol;
@@ -48,7 +42,13 @@ public class PercolationStats {
 //            System.out.printf("Number of open sites: %d\n", perc.numberOfOpenSites());
             xOpenSites[i] = perc.numberOfOpenSites();
             xProb[i] = xOpenSites[i] / (double) totalSites;
-
+        }
+        if (trials == 1) {
+            mean = xProb[0];
+            stddev = Double.NaN;
+            confidenceLo = Double.NaN;
+            confidenceHi = Double.NaN;
+        } else {
             mean = StdStats.mean(xProb);
             stddev = StdStats.stddev(xProb);
             confidenceLo = mean - 1.96 * stddev / Math.sqrt(mTrials);
@@ -81,15 +81,16 @@ public class PercolationStats {
             System.out.println("Require n and T in PercolationStats");
         }
 
+        StdRandom.setSeed(System.currentTimeMillis());
         // args[0]: n, size of the grid
         int n = Integer.parseInt(args[0]);
         // args[1]: T, testing times
         int t = Integer.parseInt(args[1]);
         PercolationStats ps = new PercolationStats(n, t);
 
-        System.out.printf("mean = %f\n", ps.mean());
-        System.out.printf("stddev = %f\n", ps.stddev());
-        System.out.printf("95%% confidence interval = [%f, %f]",
+        StdOut.printf("mean = %f\n", ps.mean());
+        StdOut.printf("stddev = %f\n", ps.stddev());
+        StdOut.printf("95%% confidence interval = [%f, %f]",
                 ps.confidenceLo(), ps.confidenceHi());
 
     }

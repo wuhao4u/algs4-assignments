@@ -23,7 +23,7 @@ public class Percolation {
         grid = new boolean[n][n];
         qfGrid = new WeightedQuickUnionUF(n * n + 2);
 //        qfGridDraw = new WeightedQuickUnionUF(n * n + 1);
-   }
+    }
 
     // UTILITY functions
     // row, col starts with 1
@@ -57,14 +57,6 @@ public class Percolation {
         if (!grid[r0][c0]) {
             // open itself
             grid[r0][c0] = true;
-
-            if (r1 == 1) {
-                // if is on the 1st row, connect it with the virtual top site
-                qfGrid.union(currentSiteIndex, 0);
-            } else if (r1 == gridSize) {
-                // if is on the bottom row, connect it with the virtual bottom site
-                qfGrid.union(currentSiteIndex, gridSize * gridSize + 1);
-            }
 
             // connect it with 4 neighbors
             // up
@@ -138,12 +130,21 @@ public class Percolation {
             if (currentSiteIndex <= gridSize) return true;
 
             // init using the original 4 neighbors
-//           for (int i = 1; i <= gridSize; ++i) {
-//                if (qfGrid.connected(currentSiteIndex, i)) {
+//            int upperRowLeftIndex;
+//            upperRowLeftIndex = getSiteIndex(r1 - 1, 1);
+//
+//            for (int i = upperRowLeftIndex; i < upperRowLeftIndex + gridSize; ++i) {
+////                if (qfGridDraw.connected(currentSiteIndex, i) && qfGridDraw.connected(currentSiteIndex, 0)) {
+//                if (qfGrid.connected(currentSiteIndex, i)
+//                        && qfGrid.connected(currentSiteIndex, 0)) {
 //                    return true;
 //                }
 //            }
-            return qfGrid.connected(currentSiteIndex, 0);
+            for (int i = 1; i <= gridSize; ++i) {
+                if (qfGrid.connected(currentSiteIndex, i)) {
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -157,23 +158,22 @@ public class Percolation {
     // does the system percolate?
     public boolean percolates() {
         // using weighted quick union
-        // TODO: is union to virtual here necessary, since we're doing it in the open() already?
         // add virtual top 0
         int virtualTopIndex = 0;
-//        for (int i = 0; i < gridSize; ++i) {
-//            if (grid[0][i]) {
-//                qfGrid.union(i + 1, virtualTopIndex);
-////                qfGridDraw.union(i, virtualTopIndex);
-//            }
-//        }
-//
-//        // add virtual bottom sites to the grid n*n
+        for (int i = 0; i < gridSize; ++i) {
+            if (grid[0][i]) {
+                qfGrid.union(i, virtualTopIndex);
+//                qfGridDraw.union(i, virtualTopIndex);
+            }
+        }
+
+        // add virtual bottom sites to the grid n*n
         int virtualBottomIndex = gridSize * gridSize + 1;
-//        for (int j = 0; j < gridSize; ++j) {
-//            if (grid[gridSize-1][j]) {
-//                qfGrid.union(virtualBottomIndex, getSiteIndex(gridSize, j + 1));
-//            }
-//        }
+        for (int j = 0; j < gridSize; ++j) {
+            if (grid[gridSize-1][j]) {
+                qfGrid.union(virtualBottomIndex, getSiteIndex(gridSize, j));
+            }
+        }
 
         return qfGrid.connected(virtualBottomIndex, virtualTopIndex);
     }
