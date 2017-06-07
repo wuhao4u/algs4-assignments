@@ -60,7 +60,7 @@ public class Deque<Item> implements Iterable<Item> {
 
             first = newNode;
             last = newNode;
-       } else if (this.size() == 1 && first == last){
+        } else if (this.size() == 1 && first == last) {
             // first & last pointing to the same node (the only node)
             newNode.next = first;
             newNode.prev = dummy;
@@ -96,8 +96,7 @@ public class Deque<Item> implements Iterable<Item> {
             last = newNode;
             first = newNode;
             dummy.next = newNode;
-        }
-        else {
+        } else {
             newNode.next = null;
             newNode.prev = last;
             last.next = newNode;
@@ -110,33 +109,34 @@ public class Deque<Item> implements Iterable<Item> {
     public Item removeFirst() {
         if (this.isEmpty()) throw new NoSuchElementException("The deque is empty.");
 
-        Item oldFirst = first.item;
+        Node oldFirst= first;
         first = first.next;
+        oldFirst.next = null;
 
-        // TODO: doing here
         if (first == null) {
-            // we're in an empty list
-            last = dummy;
+            // we only had one node, now we're in an empty list
+            last = null;
+        } else {
+            first.prev = dummy;
+            dummy.next = first;
         }
-        first.prev = dummy;
-        dummy.next = first;
-
-        return oldFirst;
+        return oldFirst.item;
     }
 
     // remove and return the item from the end
     public Item removeLast() {
         if (this.isEmpty()) throw new NoSuchElementException("The deque is empty.");
 
-        Item oldLast = last.item;
+        Node oldLast = last;
         last = last.prev;
-        return oldLast;
+        last.next = null;
+
+        return oldLast.item;
     }
 
-    // TODO: delete me
+    // TODO: delete 2 print function before handin
     public void printDeque() {
-        Node current = new Node();
-        current = dummy.next;
+        Node current = dummy.next;
 
         while (current != null) {
             System.out.println(current.item);
@@ -145,7 +145,11 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public void printDequeReversely() {
-
+        Node current = last;
+        while (current != dummy) {
+            System.out.println(current.item);
+            current = current.prev;
+        }
     }
 
     // return an iterator over items in order from front to end
@@ -196,15 +200,13 @@ public class Deque<Item> implements Iterable<Item> {
         if (N == 0) {
             if (first != null) return false;
             if (last != null) return false;
-        }
-        else if (N == 1) {
+        } else if (N == 1) {
             if (first == null || last == null)
                 return false;
             if (first.next != null || first.prev != null
                     || last.next != null || last.prev != null)
                 return false;
-        }
-        else {
+        } else {
             if (first == null || last == null)
                 return false;
             if (first.next == null || last.prev == null)
