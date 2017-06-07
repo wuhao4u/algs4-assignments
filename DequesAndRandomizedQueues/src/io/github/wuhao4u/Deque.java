@@ -97,12 +97,6 @@ public class Deque<Item> implements Iterable<Item> {
             first = newNode;
             dummy.next = newNode;
         }
-//        else if (this.size() == 1 && first == last) {
-//            newNode.next = null;
-//            newNode.prev = last;
-//            last.next = newNode;
-//            last = last.next;
-//        }
         else {
             newNode.next = null;
             newNode.prev = last;
