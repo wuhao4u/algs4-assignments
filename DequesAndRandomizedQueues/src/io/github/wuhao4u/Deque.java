@@ -1,5 +1,4 @@
-// TODO: comment out package info?
-package io.github.wuhao4u;
+// package io.github.wuhao4u;
 
 /**
  * Created by wuhao on 2017-06-06.
@@ -12,12 +11,12 @@ public class Deque<Item> implements Iterable<Item> {
     private Node dummy; // sentinel head node
     private Node first; // top of the deque
     private Node last; // bottom of the deque
-    private int N; // size of the deque
+    private int n; // size of the deque
 
     private class Node {
-        Item item;
-        Node next;
-        Node prev;
+        private Item item;
+        private Node next;
+        private Node prev;
     }
 
     // construct an empty deque
@@ -31,18 +30,17 @@ public class Deque<Item> implements Iterable<Item> {
         first = null;
         last = null;
 
-        N = 0;
-        assert check();
+        n = 0;
     }
 
     // is the deque empty?
     public boolean isEmpty() {
-        return N == 0;
+        return n == 0;
     }
 
     // return the number of items on the deque
     public int size() {
-        return N;
+        return n;
     }
 
     // add the item to the front
@@ -79,7 +77,7 @@ public class Deque<Item> implements Iterable<Item> {
 
             first = newNode;
         }
-        N++;
+        n++;
     }
 
     // add the item to the end
@@ -102,14 +100,14 @@ public class Deque<Item> implements Iterable<Item> {
             last.next = newNode;
             last = last.next;
         }
-        N++;
+        n++;
     }
 
     // remove and return the item from the front
     public Item removeFirst() {
         if (this.isEmpty()) throw new NoSuchElementException("The deque is empty.");
 
-        Node oldFirst= first;
+        Node oldFirst = first;
         first = first.next;
         oldFirst.next = null;
 
@@ -120,6 +118,7 @@ public class Deque<Item> implements Iterable<Item> {
             first.prev = dummy;
             dummy.next = first;
         }
+        n--;
         return oldFirst.item;
     }
 
@@ -131,10 +130,12 @@ public class Deque<Item> implements Iterable<Item> {
         last = last.prev;
         last.next = null;
 
+        n--;
         return oldLast.item;
     }
 
-    // TODO: delete 2 print function before handin
+    // FOR TESTING
+    /*
     public void printDeque() {
         Node current = dummy.next;
 
@@ -151,6 +152,7 @@ public class Deque<Item> implements Iterable<Item> {
             current = current.prev;
         }
     }
+    */
 
     // return an iterator over items in order from front to end
     public Iterator<Item> iterator() {
@@ -194,13 +196,13 @@ public class Deque<Item> implements Iterable<Item> {
     // check internal invariants
     private boolean check() {
         // check a few properties of instance variable 'first'
-        if (N < 0) {
+        if (n < 0) {
             return false;
         }
-        if (N == 0) {
+        if (n == 0) {
             if (first != null) return false;
             if (last != null) return false;
-        } else if (N == 1) {
+        } else if (n == 1) {
             if (first == null || last == null)
                 return false;
             if (first.next != null || first.prev != null
@@ -215,16 +217,16 @@ public class Deque<Item> implements Iterable<Item> {
 
         // check internal consistency of instance variable n
         int numberOfNodes = 0;
-        for (Node x = first; x != null && numberOfNodes <= N; x = x.next) {
+        for (Node x = first; x != null && numberOfNodes <= n; x = x.next) {
             numberOfNodes++;
         }
-        if (numberOfNodes != N) return false;
+        if (numberOfNodes != n) return false;
 
         numberOfNodes = 0;
-        for (Node y = last; y != null && numberOfNodes <= N; y = y.prev) {
+        for (Node y = last; y != null && numberOfNodes <= n; y = y.prev) {
             numberOfNodes++;
         }
-        if (numberOfNodes != N) return false;
+        if (numberOfNodes != n) return false;
 
         return true;
     }
