@@ -62,8 +62,8 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         double slope = 0.0;
-        int yDiff = that.y - this.y;
-        int xDiff = that.x - this.x;
+        double yDiff = (double) that.y - (double) this.y;
+        double xDiff = (double) that.x - (double) this.x;
 
         if (yDiff == 0 && xDiff == 0) {
             slope = Double.NEGATIVE_INFINITY;
@@ -75,7 +75,7 @@ public class Point implements Comparable<Point> {
             slope = Double.POSITIVE_INFINITY;
         }
         else {
-            slope = yDiff / (double) xDiff;
+            slope = yDiff / xDiff;
         }
 
         return slope;
