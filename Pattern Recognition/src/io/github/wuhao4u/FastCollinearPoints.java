@@ -29,28 +29,49 @@ public class FastCollinearPoints {
         lineSegMap = new HashMap<>();
 
         Point[] slopesToPoint = points.clone();
-        // TODO: make a Pair class, to temporarily store the points for lineSegments, and remove the duplicated pairs
-
         for (int i = 0; i < points.length; ++i) {
             Arrays.sort(slopesToPoint, 0, slopesToPoint.length, points[i].slopeOrder());
 
             // find collinear (exclude itself)
-            System.out.printf("--- print slopes to %d point ---\n", i);
-            System.out.println(points[i]);
-            System.out.println("-------------------------------");
+//            System.out.printf("--- print slopes to %d point ---\n", i);
+//            System.out.println(points[i]);
+//            System.out.println("-------------------------------");
 
             int colCount = 0;
-            for (int j = 1; j < slopesToPoint.length; ++j) {
+            for (int j = 0; j < slopesToPoint.length; ++j) {
                 if (points[i].compareTo(slopesToPoint[j]) != 0) {
                     // this is not the point p itself
-                    System.out.println(points[i].slopeTo(slopesToPoint[j]));
-                    System.out.print("colCount: " + colCount + '\n');
+//                    System.out.println(points[i].slopeTo(slopesToPoint[j]));
+//                    System.out.print("colCount: " + colCount + '\n');
 
                     if (points[i].slopeOrder().compare(slopesToPoint[j], slopesToPoint[j - 1]) == 0) {
                         // this point q1 and the previous point q2 has same slope to point p
                         // we might onto a collinear line
                         colCount++;
-                    } else {
+
+                        int x = 0;
+                        if (j == slopesToPoint.length - 1 && colCount >= 2) {
+                            x = 0;
+                            // this is the last one
+                            if (segCount == segs.length) {
+                                // double the segs size
+                                segs = resizeSegments(2 * segs.length);
+                            }
+
+                            Point[] pointsInLine = Arrays.copyOfRange(slopesToPoint, j - colCount, j);
+
+                            Arrays.sort(pointsInLine, 0, pointsInLine.length);
+
+                            // if not already being added, then add this new segment
+                            // TODO: here maybe wrong. we want the corner ones
+                            if (!isInSegments(pointsInLine[0], pointsInLine[pointsInLine.length - 1])) {
+                                segs[segCount++] = new LineSegment(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
+                                lineSegMap.put(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
+                            }
+
+                        }
+                    }
+                    else {
                         if (colCount >= 2) {
                             // we have more than 3 consecutive points
                             if (segCount == segs.length) {
@@ -59,13 +80,12 @@ public class FastCollinearPoints {
                             }
 
                             Point[] pointsInLine = Arrays.copyOfRange(slopesToPoint, j - colCount, j);
+
                             Arrays.sort(pointsInLine, 0, pointsInLine.length);
 
                             // if not already being added, then add this new segment
-                            if (!isInSegments(pointsInLine[0], pointsInLine[pointsInLine.length - 1])) {
-                                segs[segCount++] = new LineSegment(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
-                                lineSegMap.put(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
-                            }
+                            // TODO: here maybe wrong. we want the corner ones
+                            segs[segCount++] = new LineSegment(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
                         }
 
                         // first point on its "line"
@@ -85,11 +105,9 @@ public class FastCollinearPoints {
 
         if (lineSegMap.containsKey(p0) && lineSegMap.get(p0).compareTo(p1) == 0) {
             return true;
-        }
-        else if (lineSegMap.containsKey(p1) && lineSegMap.get(p1).compareTo(p0) == 0) {
+        } else if (lineSegMap.containsKey(p1) && lineSegMap.get(p1).compareTo(p0) == 0) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
