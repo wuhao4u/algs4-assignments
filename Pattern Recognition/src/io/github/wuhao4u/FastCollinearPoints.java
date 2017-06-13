@@ -49,9 +49,7 @@ public class FastCollinearPoints {
                         // we might onto a collinear line
                         colCount++;
 
-                        int x = 0;
                         if (j == slopesToPoint.length - 1 && colCount >= 2) {
-                            x = 0;
                             // this is the last one
                             if (segCount == segs.length) {
                                 // double the segs size
@@ -63,7 +61,7 @@ public class FastCollinearPoints {
                             Arrays.sort(pointsInLine, 0, pointsInLine.length);
 
                             // if not already being added, then add this new segment
-                            // TODO: here maybe wrong. we want the corner ones
+                            // OLDTODO: here maybe wrong. we want the corner ones
                             if (!isInSegments(pointsInLine[0], pointsInLine[pointsInLine.length - 1])) {
                                 segs[segCount++] = new LineSegment(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
                                 lineSegMap.put(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
@@ -84,7 +82,7 @@ public class FastCollinearPoints {
                             Arrays.sort(pointsInLine, 0, pointsInLine.length);
 
                             // if not already being added, then add this new segment
-                            // TODO: here maybe wrong. we want the corner ones
+                            // OLDTODO: here maybe wrong. we want the corner ones
                             segs[segCount++] = new LineSegment(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
                         }
 
@@ -118,10 +116,6 @@ public class FastCollinearPoints {
             nSegs[i] = segs[i];
         }
         return nSegs;
-    }
-
-    private LineSegment generateNewLineByPoints(Point p0, Point p1) {
-        return new LineSegment(p0, p1);
     }
 
     private boolean hasDuplicatedPoints(Point[] points) {
@@ -173,7 +167,6 @@ public class FastCollinearPoints {
         FastCollinearPoints collinear = new FastCollinearPoints(points);
         LineSegment[] ls = collinear.segments();
 
-        int x = 0;
         for (LineSegment segment : ls) {
             StdOut.println(segment);
             segment.draw();
