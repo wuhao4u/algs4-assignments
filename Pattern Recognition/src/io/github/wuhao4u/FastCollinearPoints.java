@@ -1,4 +1,4 @@
-package io.github.wuhao4u;
+//package io.github.wuhao4u;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
@@ -10,11 +10,13 @@ import java.util.Arrays;
  * Created by wuhao on 2017-06-10.
  */
 public class FastCollinearPoints {
-    private int segCount;
+    private int segsCount;
     private LineSegment[] segs;
 
     // finds all line segments containing 4 or more points
     public FastCollinearPoints(Point[] points) {
+        segsCount = 0;
+        segs = new LineSegment[8];
         Point[] slopesToPoint = points.clone();
         Arrays.sort(slopesToPoint);
 
@@ -23,68 +25,62 @@ public class FastCollinearPoints {
             throw new IllegalArgumentException("Contains repeated points");
         }
 
-        segCount = 0;
-        segs = new LineSegment[8];
 
-        for (int i = 0; i < points.length; ++i) {
-            Arrays.sort(slopesToPoint, 0, slopesToPoint.length, points[i].slopeOrder());
+        /*
+        for (int i = 0; i < points.length - 3; ++i) {
+            Arrays.sort(slopesToPoint, points[i].slopeOrder());
 
             // find collinear (exclude itself)
-            int colCount = 0;
-            for (int j = 0; j < slopesToPoint.length; ++j) {
-                if (points[i].compareTo(slopesToPoint[j]) != 0) {
-                    // this is not the point p itself
+            Point p = slopesToPoint[i];
 
-                    if (points[i].slopeOrder().compare(slopesToPoint[j], slopesToPoint[j - 1]) == 0) {
-                        // this point q1 and the previous point q2 has same slope to point p
-                        // we might onto a collinear line
-                        colCount++;
-
-                        if (j == slopesToPoint.length - 1 && colCount >= 2) {
-                            // this is the last one
-                            if (segCount == segs.length) {
-                                // double the segs size
-                                segs = resizeSegments(2 * segs.length);
-                            }
-
-                            Point[] pointsInLine = Arrays.copyOfRange(slopesToPoint, j - colCount, j);
-
-                            Arrays.sort(pointsInLine, 0, pointsInLine.length);
-
-                            // if not already being added, then add this new segment
-                            // TODO: here maybe wrong. we want the corner ones
-                            if (!isInSegments(pointsInLine[0], pointsInLine[pointsInLine.length - 1])) {
-                                segs[segCount++] = new LineSegment(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
-                            }
-                        }
-                    }
-                    else {
-                        if (colCount >= 2) {
-                            // we have more than 3 consecutive points
-                            if (segCount == segs.length) {
-                                // double the segs size
-                                segs = resizeSegments(2 * segs.length);
-                            }
-
-                            Point[] pointsInLine = Arrays.copyOfRange(slopesToPoint, j - colCount, j);
-
-                            Arrays.sort(pointsInLine, 0, pointsInLine.length);
-
-                            // if not already being added, then add this new segment
-                            // TODO: here maybe wrong. we want the corner ones
-                            segs[segCount++] = new LineSegment(pointsInLine[0], pointsInLine[pointsInLine.length - 1]);
-                        }
-
-                        // first point on its "line"
-                        colCount = 0;
-                    }
+            int first = 1;
+            int last = 2;
+            while (last < slopesToPoint.length) {
+                while (last < slopesToPoint.length &&
+                        Double.compare(p.slopeTo(slopesToPoint[first]), p.slopeTo(slopesToPoint[last])) == 0) {
+                    last++;
                 }
+
+                if (last - first >= 3 && p.compareTo(slopesToPoint[first]) < 0) {
+
+                    if (segsCount == segs.length) {
+                        segs = resizeSegments(segs.length * 2);
+                    }
+                    segs[segsCount++] = new LineSegment(p, slopesToPoint[last]);
+                }
+
+                first = last;
+                last++;
             }
         }
-    }
+        */
+        for (int i = 0; i < slopesToPoint.length - 3; i++) {
+            Arrays.sort(slopesToPoint);
 
-    private boolean isInSegments(Point p0, Point p1) {
-        return false;
+            // Sort the points according to the slopes they makes with p.
+            // Check if any 3 (or more) adjacent points in the sorted order
+            // have equal slopes with respect to p. If so, these points,
+            // together with p, are collinear.
+
+            Arrays.sort(slopesToPoint, slopesToPoint[i].slopeOrder());
+
+            for (int p = 0, first = 1, last = 2; last < slopesToPoint.length; last++) {
+                // find last collinear to p point
+                while (last < slopesToPoint.length
+                        && Double.compare(slopesToPoint[p].slopeTo(slopesToPoint[first]), slopesToPoint[p].slopeTo(slopesToPoint[last])) == 0) {
+                    last++;
+                }
+                // if found at least 3 elements, make segment if it's unique
+                if (last - first >= 3 && slopesToPoint[p].compareTo(slopesToPoint[first]) < 0) {// this is brilliant!!!!
+                    if (segsCount == segs.length) {
+                        segs = resizeSegments(segs.length * 2);
+                    }
+                    segs[segsCount++] = new LineSegment(slopesToPoint[p], slopesToPoint[last - 1]);
+                }
+                // Try to find next
+                first = last;
+            }
+        }
     }
 
     private LineSegment[] resizeSegments(int capacity) {
@@ -97,21 +93,23 @@ public class FastCollinearPoints {
 
     // the points needs to be sorted
     private boolean hasDuplicatedPoints(Point[] points) {
+        if (points.length < 2) return false;
+
         for (int i = 1; i < points.length; ++i) {
-            if (points[i].equals(points[i-1])) return true;
+            if (points[i].equals(points[i - 1])) return true;
         }
         return false;
     }
 
     // the number of line segments
     public int numberOfSegments() {
-        return segCount;
+        return segsCount;
     }
 
     // the line segments
     public LineSegment[] segments() {
-        LineSegment[] ret = new LineSegment[segCount];
-        for (int i = 0; i < segCount; ++i) {
+        LineSegment[] ret = new LineSegment[segsCount];
+        for (int i = 0; i < segsCount; ++i) {
             ret[i] = segs[i];
         }
         return ret;

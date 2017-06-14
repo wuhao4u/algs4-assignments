@@ -1,4 +1,4 @@
-package io.github.wuhao4u;
+//package io.github.wuhao4u;
 
 /******************************************************************************
  *  Compilation:  javac Point.java
