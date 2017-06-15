@@ -1,4 +1,4 @@
-//package io.github.wuhao4u;
+package io.github.wuhao4u;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
