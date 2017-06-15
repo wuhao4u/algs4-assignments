@@ -31,7 +31,7 @@ public final class Solver {
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        return -1;
+        return movesMade;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable

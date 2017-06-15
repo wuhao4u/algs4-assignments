@@ -1,9 +1,9 @@
 package io.github.wuhao4u;
 
-import edu.princeton.cs.algs4.Queue;
+import java.util.*;
 
-import java.util.Collection;
-import java.util.Iterator;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdRandom;
 
 /**
  * Created by wuhao on 2017-06-14.
@@ -30,9 +30,7 @@ public class Board {
                 goalBoard[i][j] = tileNum++;
             }
         }
-        goalBoard[n-1][n-1] = 0;
-
-
+        goalBoard[n - 1][n - 1] = 0;
     }
 
     // board dimension n
@@ -42,13 +40,14 @@ public class Board {
 
     // number of blocks out of place
     public int hamming() {
-        int ret = 0;
+        int hamSum = 0;
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (tiles[i][j] != goalBoard[i][j]) ++ret;
+                if (tiles[i][j] == 0) continue;
+                if (tiles[i][j] != goalBoard[i][j]) ++hamSum;
             }
         }
-        return ret;
+        return hamSum;
     }
 
     // sum of Manhattan distances between blocks and goal
@@ -60,17 +59,25 @@ public class Board {
         // where is the correct position?
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
-                correctY = tiles[i][j] / n;
-                correctX = tiles[i][j] - correctY * n - 1;
+                // empty tile does not count
+                int val = tiles[i][j];
+                if (val == 0) continue;
+
+                if (val % n == 0) {
+                    // last item in the row, right edge
+                    correctY = val / n - 1;
+                } else {
+                    correctY = val / n;
+                }
+                correctX = val - correctY * n - 1;
 
                 // absolute difference between current x, y to the correct x, y is the manhattan val
-                yDiff = Math.abs((j+1) - correctY);
-                xDiff = Math.abs((i+1) - correctX);
+                yDiff = Math.abs(i - correctY);
+                xDiff = Math.abs(j - correctX);
 
                 manhattanSum += yDiff + xDiff;
             }
         }
-
 
         return manhattanSum;
     }
@@ -89,11 +96,30 @@ public class Board {
     public Board twin() {
         int[][] fTiles = tiles.clone();
 
-        // TODO: make this more sophiscated
-        // flip 0,0 and 0,1
-        int temp = fTiles[0][0];
-        fTiles[0][0] = fTiles[0][1];
-        fTiles[0][1] = temp;
+        int ind = StdRandom.uniform(n * n);
+        int rx = ind / n;
+        int ry = ind - rx * n - 1;
+
+        int[] emptyInd = emptyTileIndices();
+        int ex = emptyInd[0];
+        int ey = emptyInd[1];
+        while (rx == ex && ry == ey) {
+            ind = StdRandom.uniform(n * n);
+            rx = ind / n;
+            ry = ind - rx * n - 1;
+        }
+
+        if (inBoard(rx - 1, ry)) {
+            // swap with the left one
+            int temp = fTiles[rx - 1][ry];
+            fTiles[rx - 1][ry] = fTiles[rx][ry];
+            fTiles[rx][ry] = temp;
+        } else {
+            // swap with the right one
+            int temp = fTiles[rx + 1][ry];
+            fTiles[rx + 1][ry] = fTiles[rx][ry];
+            fTiles[rx][ry] = temp;
+        }
 
         Board flipped = new Board(fTiles);
         return flipped;
@@ -103,10 +129,13 @@ public class Board {
     public boolean equals(Object y) {
         if (y == null) return false;
         if (y == this) return true;
-        if (!(y instanceof Board)) return false;
+//        if (!(y instanceof Board)) return false;
+        if (this.getClass() != y.getClass()) return false;
 
         Board that = (Board) y;
-        if (that.dimension() == n) {
+        if (that.dimension() != n) {
+            return false;
+        } else {
             for (int i = 0; i < n; ++i) {
                 for (int j = 0; j < n; ++j) {
                     if (this.tiles[i][j] != that.tiles[i][j]) {
@@ -114,18 +143,93 @@ public class Board {
                     }
                 }
             }
-        } else {
-            return false;
         }
+
         return true;
     }
 
-    // all neighboring boards
-    // TODO: fill in 4 neighbors in a queue
-    public Iterable<Board> neighbors() {
-        Queue ret = new Queue();
+    private int[] emptyTileIndices() {
+        int[] ind = {-1, -1};
 
-        return ret;
+        // find the empty tile indices
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (tiles[i][j] == 0) {
+                    ind[0] = i;
+                    ind[1] = j;
+                }
+            }
+        }
+
+        if (ind[0] < 0 || ind[1] < 0) {
+            throw new IllegalArgumentException("Board missing empty tile.");
+        }
+
+        return ind;
+    }
+
+    private boolean inBoard(int x, int y) {
+        if (x < 0 || x >= n) return false;
+        if (y < 0 || y >= n) return false;
+        return true;
+    }
+
+    private void swapTiles(int[][] board, int x1, int y1, int x2, int y2) {
+        if ((!inBoard(x1, y1)) || (!inBoard(x2, y2))) {
+            throw new IllegalArgumentException("Non-exists tiles in the argument");
+        }
+        int temp = board[x1][y1];
+        board[x1][y1] = board[x2][y2];
+        board[x2][y2] = temp;
+    }
+
+    // all neighboring boards
+    public Iterable<Board> neighbors() {
+        Queue neighborsQ = new ArrayDeque();
+
+        // get empty tile indices
+        int x, y;
+        int[] ind = emptyTileIndices();
+        x = ind[0];
+        y = ind[1];
+
+        // left
+        int lx = x - 1, ly = y;
+        if (inBoard(lx, ly)) {
+            int[][] lTiles = tiles.clone();
+            swapTiles(lTiles, x, y, lx, ly);
+            Board lb = new Board(lTiles);
+            neighborsQ.add(lb);
+        }
+
+        // right
+        int rx = x + 1, ry = y;
+        if (inBoard(rx, ry)) {
+            int[][] rTiles = tiles.clone();
+            swapTiles(rTiles, x, y, rx, ry);
+            Board rb = new Board(rTiles);
+            neighborsQ.add(rb);
+        }
+
+        // up
+        int ux = x, uy = y - 1;
+        if (inBoard(ux, uy)) {
+            int[][] uTiles = tiles.clone();
+            swapTiles(uTiles, x, y, ux, uy);
+            Board ub = new Board(uTiles);
+            neighborsQ.add(ub);
+        }
+
+        // down
+        int dx = x, dy = y + 1;
+        if (inBoard(lx, ly)) {
+            int[][] dTiles = tiles.clone();
+            swapTiles(dTiles, x, y, dx, dy);
+            Board ub = new Board(dTiles);
+            neighborsQ.add(ub);
+        }
+
+        return neighborsQ;
     }
 
     // string representation of this board (in the output format specified below)
@@ -142,5 +246,18 @@ public class Board {
     }
 
     // unit tests (not graded)
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+        In in = new In(args[0]);
+        int n = in.readInt();
+        int[][] blocks = new int[n][n];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                blocks[i][j] = in.readInt();
+
+        Board initial = new Board(blocks);
+
+        TestBoard tb = new TestBoard(initial);
+        tb.testHamming();
+        tb.testManhattan();
+    }
 }
