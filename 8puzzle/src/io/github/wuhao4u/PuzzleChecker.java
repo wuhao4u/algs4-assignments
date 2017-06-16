@@ -30,6 +30,8 @@ package io.github.wuhao4u;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.ArrayList;
+
 public class PuzzleChecker {
 
     public static void main(String[] args) {
@@ -51,7 +53,16 @@ public class PuzzleChecker {
             // solve the slider puzzle
             Board initial = new Board(tiles);
             Solver solver = new Solver(initial);
+            x = 1;
             StdOut.println(filename + ": " + solver.moves());
+
+            // print the solution
+            StdOut.println("Here is the solution path.");
+            Iterable<Board> solBoards = solver.solution();
+            for(Board b : solBoards) {
+                StdOut.println("------");
+                StdOut.println(b);
+            }
         }
     }
 }
