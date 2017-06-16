@@ -21,7 +21,7 @@ public class Board {
         n = blocks.length;
         goalBoard = new int[n][n];
 
-        tiles = blocks.clone();
+        tiles = copy2DArray(blocks);
 
         // generate a goal board, 1 ~ n^2-1
         int tileNum = 1;
@@ -31,6 +31,14 @@ public class Board {
             }
         }
         goalBoard[n - 1][n - 1] = 0;
+    }
+
+    private int[][] copy2DArray(int[][] origin) {
+        final int[][] copiedArray = new int[origin.length][origin.length];
+        for (int i = 0; i < origin.length; i++) {
+            copiedArray[i] = Arrays.copyOf(origin[i], origin[i].length);
+        }
+        return copiedArray;
     }
 
     // board dimension n
@@ -94,31 +102,28 @@ public class Board {
 
     // a board that is obtained by exchanging any pair of blocks
     public Board twin() {
-        int[][] fTiles = tiles.clone();
+        int[][] fTiles = copy2DArray(tiles);
 
-        int ind = StdRandom.uniform(n * n);
-        int rx = ind / n;
-        int ry = ind - rx * n - 1;
+        int ri, rj;
 
-        int[] emptyInd = emptyTileIndices();
-        int ex = emptyInd[0];
-        int ey = emptyInd[1];
-        while (rx == ex && ry == ey) {
-            ind = StdRandom.uniform(n * n);
-            rx = ind / n;
-            ry = ind - rx * n - 1;
-        }
+        while (true) {
+            ri = StdRandom.uniform(n);
+            rj = StdRandom.uniform(n);
+            System.out.printf("ri: %d, rj: %d\n", ri, rj);
 
-        if (inBoard(rx - 1, ry)) {
-            // swap with the left one
-            int temp = fTiles[rx - 1][ry];
-            fTiles[rx - 1][ry] = fTiles[rx][ry];
-            fTiles[rx][ry] = temp;
-        } else {
-            // swap with the right one
-            int temp = fTiles[rx + 1][ry];
-            fTiles[rx + 1][ry] = fTiles[rx][ry];
-            fTiles[rx][ry] = temp;
+            if (fTiles[ri][rj] == 0) continue;
+
+            if (inBoard(ri, rj - 1) && fTiles[ri][rj - 1] != 0) {
+                // swap with the left one
+                swapTiles(fTiles, ri, rj, ri, rj-1);
+                break;
+            }
+
+            if (inBoard(ri, rj + 1) && fTiles[ri][rj+1] != 0) {
+                // swap with the right one
+                swapTiles(fTiles, ri, rj, ri, rj+1);
+                break;
+            }
         }
 
         Board flipped = new Board(fTiles);
@@ -129,7 +134,6 @@ public class Board {
     public boolean equals(Object y) {
         if (y == null) return false;
         if (y == this) return true;
-//        if (!(y instanceof Board)) return false;
         if (this.getClass() != y.getClass()) return false;
 
         Board that = (Board) y;
@@ -168,19 +172,19 @@ public class Board {
         return ind;
     }
 
-    private boolean inBoard(int x, int y) {
-        if (x < 0 || x >= n) return false;
-        if (y < 0 || y >= n) return false;
+    private boolean inBoard(int i, int j) {
+        if (i < 0 || i >= n) return false;
+        if (j < 0 || j >= n) return false;
         return true;
     }
 
-    private void swapTiles(int[][] board, int x1, int y1, int x2, int y2) {
-        if ((!inBoard(x1, y1)) || (!inBoard(x2, y2))) {
+    private void swapTiles(int[][] board, int i1, int j1, int i2, int j2) {
+        if ((!inBoard(i1, j1)) || (!inBoard(i2, j2))) {
             throw new IllegalArgumentException("Non-exists tiles in the argument");
         }
-        int temp = board[x1][y1];
-        board[x1][y1] = board[x2][y2];
-        board[x2][y2] = temp;
+        int temp = board[i1][j1];
+        board[i1][j1] = board[i2][j2];
+        board[i2][j2] = temp;
     }
 
     // all neighboring boards
@@ -188,45 +192,59 @@ public class Board {
         Queue neighborsQ = new ArrayDeque();
 
         // get empty tile indices
-        int x, y;
+        int i, j;
         int[] ind = emptyTileIndices();
-        x = ind[0];
-        y = ind[1];
+        i = ind[0];
+        j = ind[1];
+
+        int lj = j - 1, li = i;
+        int rj = j + 1, ri = i;
+        int uj = j, ui = i - 1;
+        int dj = j, di = i + 1;
+
 
         // left
-        int lx = x - 1, ly = y;
-        if (inBoard(lx, ly)) {
-            int[][] lTiles = tiles.clone();
-            swapTiles(lTiles, x, y, lx, ly);
+        if (inBoard(li, lj)) {
+            int[][] lTiles = copy2DArray(tiles);
+            swapTiles(lTiles, i, j, li, lj);
             Board lb = new Board(lTiles);
+//            System.out.println("lb:");
+//            System.out.println(lb.toString());
             neighborsQ.add(lb);
         }
 
         // right
-        int rx = x + 1, ry = y;
-        if (inBoard(rx, ry)) {
-            int[][] rTiles = tiles.clone();
-            swapTiles(rTiles, x, y, rx, ry);
+        if (inBoard(ri, rj)) {
+            int[][] rTiles = copy2DArray(tiles);
+            swapTiles(rTiles, i, j, ri, rj);
             Board rb = new Board(rTiles);
+//            System.out.println("rb:");
+//            System.out.println(rb.toString());
             neighborsQ.add(rb);
         }
 
         // up
-        int ux = x, uy = y - 1;
-        if (inBoard(ux, uy)) {
-            int[][] uTiles = tiles.clone();
-            swapTiles(uTiles, x, y, ux, uy);
+        if (inBoard(ui, uj)) {
+            int[][] uTiles = copy2DArray(tiles);
+            swapTiles(uTiles, i, j, ui, uj);
             Board ub = new Board(uTiles);
+
+//            System.out.println("ub:");
+//            System.out.println(ub.toString());
+
             neighborsQ.add(ub);
         }
 
         // down
-        int dx = x, dy = y + 1;
-        if (inBoard(lx, ly)) {
-            int[][] dTiles = tiles.clone();
-            swapTiles(dTiles, x, y, dx, dy);
-            Board ub = new Board(dTiles);
-            neighborsQ.add(ub);
+        if (inBoard(di, dj)) {
+            int[][] dTiles = copy2DArray(tiles);
+            swapTiles(dTiles, i, j, di, dj);
+            Board db = new Board(dTiles);
+
+//            System.out.println("db:");
+//            System.out.println(db.toString());
+
+            neighborsQ.add(db);
         }
 
         return neighborsQ;
@@ -257,7 +275,11 @@ public class Board {
         Board initial = new Board(blocks);
 
         TestBoard tb = new TestBoard(initial);
-        tb.testHamming();
-        tb.testManhattan();
+//        tb.testHamming();
+//        tb.testManhattan();
+//        tb.testIsGoal();
+//        tb.testTwin();
+//        tb.testEquals();
+        tb.testNeighbors();
     }
 }
