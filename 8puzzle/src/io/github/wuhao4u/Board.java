@@ -12,7 +12,7 @@ import edu.princeton.cs.algs4.StdRandom;
 public class Board {
     private int n; // this is the dimension of the board, not total number of tiles
     private int[][] goalBoard;
-    public int[][] tiles;
+    private int[][] tiles;
 
     // construct a board from an n-by-n array of blocks
     // (where blocks[i][j] = block in row i, column j)
@@ -109,7 +109,6 @@ public class Board {
         while (true) {
             ri = StdRandom.uniform(n);
             rj = StdRandom.uniform(n);
-            System.out.printf("ri: %d, rj: %d\n", ri, rj);
 
             if (fTiles[ri][rj] == 0) continue;
 
@@ -189,7 +188,7 @@ public class Board {
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        Queue neighborsQ = new ArrayDeque();
+        ArrayDeque<Board> neighborsQ = new ArrayDeque<Board>();
 
         // get empty tile indices
         int i, j;
@@ -208,8 +207,6 @@ public class Board {
             int[][] lTiles = copy2DArray(tiles);
             swapTiles(lTiles, i, j, li, lj);
             Board lb = new Board(lTiles);
-//            System.out.println("lb:");
-//            System.out.println(lb.toString());
             neighborsQ.add(lb);
         }
 
@@ -218,8 +215,6 @@ public class Board {
             int[][] rTiles = copy2DArray(tiles);
             swapTiles(rTiles, i, j, ri, rj);
             Board rb = new Board(rTiles);
-//            System.out.println("rb:");
-//            System.out.println(rb.toString());
             neighborsQ.add(rb);
         }
 
@@ -228,10 +223,6 @@ public class Board {
             int[][] uTiles = copy2DArray(tiles);
             swapTiles(uTiles, i, j, ui, uj);
             Board ub = new Board(uTiles);
-
-//            System.out.println("ub:");
-//            System.out.println(ub.toString());
-
             neighborsQ.add(ub);
         }
 
@@ -240,10 +231,6 @@ public class Board {
             int[][] dTiles = copy2DArray(tiles);
             swapTiles(dTiles, i, j, di, dj);
             Board db = new Board(dTiles);
-
-//            System.out.println("db:");
-//            System.out.println(db.toString());
-
             neighborsQ.add(db);
         }
 
@@ -274,12 +261,12 @@ public class Board {
 
         Board initial = new Board(blocks);
 
-        TestBoard tb = new TestBoard(initial);
+//        TestBoard tb = new TestBoard(initial);
 //        tb.testHamming();
 //        tb.testManhattan();
 //        tb.testIsGoal();
 //        tb.testTwin();
 //        tb.testEquals();
-        tb.testNeighbors();
+//        tb.testNeighbors();
     }
 }

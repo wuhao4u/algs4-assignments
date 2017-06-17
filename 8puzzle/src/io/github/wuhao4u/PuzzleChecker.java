@@ -54,14 +54,18 @@ public class PuzzleChecker {
             Board initial = new Board(tiles);
             Solver solver = new Solver(initial);
             x = 1;
-            StdOut.println(filename + ": " + solver.moves());
+            if (solver.isSolvable()) {
+                StdOut.println(filename + ": " + solver.moves());
 
-            // print the solution
-            StdOut.println("Here is the solution path.");
-            Iterable<Board> solBoards = solver.solution();
-            for(Board b : solBoards) {
-                StdOut.println("------");
-                StdOut.println(b);
+                // print the solution
+                StdOut.println("Here is the solution path.");
+                Iterable<Board> solBoards = solver.solution();
+                for (Board b : solBoards) {
+                    StdOut.println("------");
+                    StdOut.println(b);
+                }
+            } else {
+                StdOut.println("Is not solvable!");
             }
         }
     }
