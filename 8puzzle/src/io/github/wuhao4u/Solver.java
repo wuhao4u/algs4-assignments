@@ -6,7 +6,6 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayDeque;
 import java.util.Comparator;
-import java.util.Stack;
 
 /**
  * Created by wuhao on 2017-06-14.
@@ -41,17 +40,17 @@ public final class Solver {
         }
 
         // previous search node
-        private SearchNode cameFrom;
+        private SearchNode prev;
 
         public SearchNode getCameFrom() {
-            return cameFrom;
+            return prev;
         }
 
         public SearchNode(Board initBoard, int gs, int fs, SearchNode cf) {
             this.bd = initBoard;
             this.gScore = gs;
             this.fScore = fs;
-            this.cameFrom = cf;
+            this.prev = cf;
         }
 
         @Override
@@ -66,7 +65,7 @@ public final class Solver {
     }
 
     private final MinPQ<SearchNode> openSet;
-//    private final Stack<SearchNode> closedSet; // final node would be on the top of the stack
+    //    private final Stack<SearchNode> closedSet; // final node would be on the top of the stack
     private final Board initialBoard;
     private final boolean solvable;
     private final SearchNode lastNode;
@@ -79,7 +78,6 @@ public final class Solver {
         // initialize data structures
         this.initialBoard = initial;
         this.openSet = new MinPQ<>();
-//        this.closedSet = new Stack<>();
 
         this.lastNode = aStar(initial);
 
@@ -88,9 +86,9 @@ public final class Solver {
         this.solutionPath = new ArrayDeque<>();
 
         SearchNode tracer = lastNode;
-        while (tracer.cameFrom != null) {
+        while (tracer.prev != null) {
             this.solutionPath.addFirst(tracer.bd);
-            tracer = tracer.cameFrom;
+            tracer = tracer.prev;
         }
         // the initial node
         solutionPath.addFirst(tracer.bd);
@@ -100,46 +98,33 @@ public final class Solver {
 
     private SearchNode aStar(Board initial) {
         // start node
-        SearchNode start = new SearchNode(initial, 0, initial.hamming(), null);
+        SearchNode start = new SearchNode(initial, 0, initial.manhattan(), null);
         openSet.insert(start);
 
         // create a twin node with initial, for checking solvability
         Board twinInit = initial.twin();
-        SearchNode twinStart = new SearchNode(twinInit, 0, twinInit.hamming(), null);
+        SearchNode twinStart = new SearchNode(twinInit, 0, twinInit.manhattan(), null);
         openSet.insert(twinStart);
 
-        SearchNode current = start;
-
-        while (!openSet.min().bd.isGoal()) {
-            // if there are still nodes in openSet, process it
+        SearchNode current;
+        while (true) {
             current = openSet.delMin();
 
-            for (Board neighbor : current.bd.neighbors()) {
-                if (current.cameFrom != null && neighbor.equals(current.cameFrom.bd)) {
-                    // we've already visited this board
-                    continue;
-                }
+            if (current.bd.isGoal()) break;
 
-                if (!contains(openSet, neighbor)) {
+            for (Board neighbor : current.bd.neighbors()) {
+                if (current.prev == null || !neighbor.equals(current.prev.bd)) {
+                    // null meaning is the init node, neighbor should not be the node that it came from
                     SearchNode nNode = new SearchNode(neighbor, current.gScore + 1,
-                            current.gScore + 1 + neighbor.hamming(), current);
+                            current.gScore + 1 + neighbor.manhattan(), current);
                     openSet.insert(nNode);
                 }
             }
+            // if there are still nodes in openSet, process it
+//            current = openSet.delMin();
         }
-
-        current = openSet.delMin();
 
         return current;
-    }
-
-    private boolean contains(Iterable<SearchNode> nodes, Board b) {
-        for (SearchNode node : nodes) {
-            // comparing board to board
-            if (b.equals(node.bd)) return true;
-        }
-
-        return false;
     }
 
     // is the initial board solvable?
