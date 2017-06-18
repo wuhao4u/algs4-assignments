@@ -66,9 +66,11 @@ public final class Solver {
     }
 
     private final MinPQ<SearchNode> openSet;
-    private final Stack<SearchNode> closedSet; // final node would be on the top of the stack
+//    private final Stack<SearchNode> closedSet; // final node would be on the top of the stack
     private final Board initialBoard;
     private final boolean solvable;
+    private final SearchNode lastNode;
+    private final ArrayDeque<Board> solutionPath;
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
@@ -77,43 +79,43 @@ public final class Solver {
         // initialize data structures
         this.initialBoard = initial;
         this.openSet = new MinPQ<>();
-        this.closedSet = new Stack<>();
+//        this.closedSet = new Stack<>();
 
-        this.solvable = aStar(initial);
+        this.lastNode = aStar(initial);
+
+        if (lastNode == null) throw new NullPointerException();
+
+        this.solutionPath = new ArrayDeque<>();
+
+        SearchNode tracer = lastNode;
+        while (tracer.cameFrom != null) {
+            this.solutionPath.addFirst(tracer.bd);
+            tracer = tracer.cameFrom;
+        }
+        // the initial node
+        solutionPath.addFirst(tracer.bd);
+
+        this.solvable = (tracer.bd.equals(initial));
     }
 
-    private boolean aStar(Board initial) {
+    private SearchNode aStar(Board initial) {
         // start node
         SearchNode start = new SearchNode(initial, 0, initial.hamming(), null);
         openSet.insert(start);
 
-        // twin data structures
-        MinPQ<SearchNode> twinOpen = new MinPQ<>();
-        Stack<SearchNode> twinClosed = new Stack<>();
-
         // create a twin node with initial, for checking solvability
         Board twinInit = initial.twin();
         SearchNode twinStart = new SearchNode(twinInit, 0, twinInit.hamming(), null);
-        twinOpen.insert(twinStart);
+        openSet.insert(twinStart);
 
-        while ((!openSet.isEmpty()) && (!twinOpen.isEmpty())) {
+        SearchNode current = start;
+
+        while (!openSet.min().bd.isGoal()) {
             // if there are still nodes in openSet, process it
-
-            SearchNode current = openSet.delMin();
-            closedSet.push(current);
-
-            SearchNode twinCurrent = twinOpen.delMin();
-            twinClosed.push(twinCurrent);
-
-            if (current.bd.isGoal()) {
-                // we found the solution
-                return true;
-            } else if (twinCurrent.bd.isGoal()) {
-                return false;
-            }
+            current = openSet.delMin();
 
             for (Board neighbor : current.bd.neighbors()) {
-                if (closedSet.search(neighbor) != -1) {
+                if (current.cameFrom != null && neighbor.equals(current.cameFrom.bd)) {
                     // we've already visited this board
                     continue;
                 }
@@ -124,22 +126,11 @@ public final class Solver {
                     openSet.insert(nNode);
                 }
             }
-
-            // twin
-            for (Board twinNeighbor : twinCurrent.bd.neighbors()) {
-                if (twinClosed.search(twinNeighbor) != -1) {
-                    continue;
-                }
-
-                if (!contains(twinClosed, twinNeighbor)) {
-                    SearchNode twinNewNode = new SearchNode(twinNeighbor, twinCurrent.gScore + 1,
-                            twinCurrent.gScore + 1 + twinNeighbor.hamming(), twinCurrent);
-                    twinOpen.insert(twinNewNode);
-                }
-            }
         }
 
-        return false;
+        current = openSet.delMin();
+
+        return current;
     }
 
     private boolean contains(Iterable<SearchNode> nodes, Board b) {
@@ -159,24 +150,17 @@ public final class Solver {
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
         if (isSolvable())
-            return this.closedSet.peek().gScore;
+            return this.lastNode.gScore;
         else
             return -1;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
-        if (!isSolvable()) return null;
-
-        ArrayDeque<Board> q = new ArrayDeque<>();
-
-        SearchNode currentNode = this.closedSet.peek();
-        while (!currentNode.bd.equals(this.initialBoard)) {
-            q.addFirst(currentNode.bd);
-            currentNode = currentNode.cameFrom;
-        }
-
-        return q;
+        if (!isSolvable())
+            return null;
+        else
+            return this.solutionPath;
     }
 
     // solve a slider puzzle (given below)
