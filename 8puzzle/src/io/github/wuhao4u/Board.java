@@ -11,7 +11,6 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class Board {
     private int n; // this is the dimension of the board, not total number of tiles
-    private int[][] goalBoard;
     private int[][] tiles;
 
     // construct a board from an n-by-n array of blocks
@@ -19,18 +18,8 @@ public class Board {
     public Board(int[][] blocks) {
         if (blocks == null) throw new NullPointerException("Give me a block please!");
         n = blocks.length;
-        goalBoard = new int[n][n];
 
         tiles = copy2DArray(blocks);
-
-        // generate a goal board, 1 ~ n^2-1
-        int tileNum = 1;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                goalBoard[i][j] = tileNum++;
-            }
-        }
-        goalBoard[n - 1][n - 1] = 0;
     }
 
     private int[][] copy2DArray(int[][] origin) {
@@ -52,7 +41,7 @@ public class Board {
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (tiles[i][j] == 0) continue;
-                if (tiles[i][j] != goalBoard[i][j]) ++hamSum;
+                if (tiles[i][j] != (i * n + j + 1)) ++hamSum;
             }
         }
         return hamSum;
@@ -92,9 +81,15 @@ public class Board {
 
     // is this board the goal board?
     public boolean isGoal() {
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (tiles[i][j] != goalBoard[i][j]) return false;
+        int i = 0, j = 0;
+
+        for (i = 0; i < n; ++i) {
+            for (j = 0; j < n; ++j) {
+                if (i == n-1 && j == n-1) {
+                    if (tiles[i][j] != 0) return false;
+                } else {
+                    if (tiles[i][j] != (i * n + j + 1)) return false;
+                }
             }
         }
         return true;
@@ -261,6 +256,9 @@ public class Board {
 
         Board initial = new Board(blocks);
 
+//        initial.test();
+//        StdOut.println("---Initial---");
+//        StdOut.println(initial);
 //        TestBoard tb = new TestBoard(initial);
 //        tb.testHamming();
 //        tb.testManhattan();
