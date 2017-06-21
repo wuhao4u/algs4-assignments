@@ -1,3 +1,4 @@
+package io.github.wuhao4u;
 /******************************************************************************
  *  Compilation:  javac KdTreeVisualizer.java
  *  Execution:    java KdTreeVisualizer

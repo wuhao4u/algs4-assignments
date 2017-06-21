@@ -1,3 +1,4 @@
+package io.github.wuhao4u;
 /******************************************************************************
  *  Compilation:  javac KdTreeGenerator.java
  *  Execution:    java KdTreeGenerator n

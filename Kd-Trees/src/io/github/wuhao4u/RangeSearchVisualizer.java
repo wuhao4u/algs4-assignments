@@ -1,3 +1,4 @@
+package io.github.wuhao4u;
 /******************************************************************************
  *  Compilation:  javac RangeSearchVisualizer.java
  *  Execution:    java RangeSearchVisualizer input.txt
