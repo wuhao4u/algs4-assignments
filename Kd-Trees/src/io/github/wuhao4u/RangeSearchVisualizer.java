@@ -21,7 +21,6 @@ import edu.princeton.cs.algs4.StdDraw;
 public class RangeSearchVisualizer {
 
     public static void main(String[] args) {
-
         String filename = args[0];
         In in = new In(filename);
 

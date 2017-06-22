@@ -2,8 +2,6 @@ package io.github.wuhao4u;
 
 import edu.princeton.cs.algs4.*;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**
@@ -40,7 +38,7 @@ public class PointSET {
     // draw all points to standard draw
     public void draw() {
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setPenRadius(0.001);
+        StdDraw.setPenRadius(0.1);
         for (Point2D p : mSet) {
             StdDraw.point(p.x(), p.y());
         }
@@ -103,13 +101,11 @@ public class PointSET {
         StdOut.printf("contains random point exists? %b\n", brute.contains(new Point2D(0.851309 ,0.881449)));
         StdOut.printf("contains random point? %b\n", brute.contains(new Point2D(0.5, 0.5)));
 
-        /*
         StdDraw.enableDoubleBuffering();
         StdOut.println("---test draw---");
         StdDraw.clear();
         brute.draw();
         StdDraw.show();
-        */
 
         StdOut.println("---test range---");
         TreeSet<Point2D> rangePoints =
