@@ -14,14 +14,12 @@ public class KdTree {
         private Node lb;        // the left/bottom subtree
         private Node rt;        // the right/top subtree
         private double key;
-//        private boolean vertical;
 
         public Node(Point2D p, RectHV rect, Node ln, Node rn) {
             this.val = p;
             this.rect = rect;
             this.lb = ln;
             this.rt = rn;
-//            this.vertical = o;
         }
     }
 
@@ -48,7 +46,6 @@ public class KdTree {
     // does the set contain point p?
     public boolean contains(Point2D p) {
         Node n = get(mRoot, p, true);
-        // TODO: test when the p does not exists
         return n != null;
     }
 
@@ -73,48 +70,96 @@ public class KdTree {
         if (contains(p)) return;
 
         // alternate with x and y coordinates as p while inserting
-        mRoot = put(mRoot, p, true);
-        int x = 0;
+        mRoot = put(mRoot, p, true, new RectHV(0, 0, 1, 1));
     }
 
     // x: parent node
     // p: the point of the node
     // hv: orientation of the new node
-    private Node put(Node n, Point2D p, boolean isVertical) {
-        // TODO: step 2
+    private Node put(Node n, Point2D p, boolean isVertical, RectHV parentRect) {
         // root node has no parent node
-        if (n == null) return new Node(p, null, null, null);
+        // TODO: the rectangle
+        if (n == null) return new Node(p, parentRect, null, null);
 
         int cmp;
+        RectHV rhv;
         if (isVertical) {
             // we determine by x value
             cmp = Double.compare(p.x(), n.val.x());
         } else {
             cmp = Double.compare(p.y(), n.val.y());
-//            cmp = Double.compare(n.val.y(), p.y());
         }
 
-        if (cmp < 0) n.lb = put(n.lb, p, !isVertical);
-        if (cmp > 0) n.rt = put(n.rt, p, !isVertical);
-//        else n.val = p;
+
+        if (cmp < 0) {
+            if (isVertical) {
+                // set Xmax
+                rhv = new RectHV(parentRect.xmin(), parentRect.ymin(), n.val.x(), parentRect.ymax());
+            } else {
+
+                // set Ymax
+                rhv = new RectHV(parentRect.xmin(), parentRect.ymin(), parentRect.xmax(), n.val.y());
+            }
+            n.lb = put(n.lb, p, !isVertical, rhv);
+        }
+        if (cmp > 0) {
+            if (isVertical) {
+                // set Xmin
+                rhv = new RectHV(n.val.x(), parentRect.ymin(), parentRect.xmax(), parentRect.ymax());
+            } else {
+                // set Ymin
+                rhv = new RectHV(parentRect.xmin(), n.val.y(), parentRect.xmax(), parentRect.ymax());
+            }
+            n.rt = put(n.rt, p, !isVertical, rhv);
+        }
+
+        // cmp == 0 meaning there's are duplicated points, should never happens,
+        // if so, we'll just ignore it and keep the old one
 
         return n;
     }
 
-
     // draw all points to standard draw
     public void draw() {
+        // TODO: doing
+        drawNode(mRoot, true);
+    }
 
+    private void drawNode(Node node, boolean isVertical) {
+        if (node == null || node.val == null) return;
+
+        // draw point itself
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(0.01);
+        StdDraw.point(node.val.x(), node.val.y());
+
+        StdDraw.setPenRadius(0.001);
+        if (isVertical) {
+            // draw vertical line, red
+            StdDraw.setPenColor(StdDraw.RED);
+            StdDraw.line(node.val.x(), node.rect.ymin(), node.val.x(), node.rect.ymax());
+        } else {
+            // draw horizontal line, blue
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.line(node.rect.xmin(), node.val.y(), node.rect.xmax(), node.val.y());
+        }
+
+        // left
+        drawNode(node.lb, !isVertical);
+        // right
+        drawNode(node.rt, !isVertical);
     }
 
     // all points that are inside the rectangle
     public Iterable<Point2D> range(RectHV rect) {
+        // TODO
         TreeSet ts = new TreeSet<Point2D>();
         return ts;
     }
 
     // a nearest neighbor in the set to point p; null if the set is empty
     public Point2D nearest(Point2D p) {
+        // TODO
         return p;
     }
 
@@ -123,7 +168,7 @@ public class KdTree {
         String filename = args[0];
         In in = new In(filename);
 
-//        StdDraw.enableDoubleBuffering();
+        StdDraw.enableDoubleBuffering();
 
         // initialize the data structures with N points from standard input
         KdTree kdtree = new KdTree();
@@ -135,6 +180,12 @@ public class KdTree {
             kdtree.insert(p);
         }
 
+        StdDraw.enableDoubleBuffering();
+        StdOut.println("---test draw---");
+        StdDraw.clear();
+        kdtree.draw();
+        StdDraw.show();
+        /*
         Point2D p0, p05, p1;
         p0 = new Point2D(0, 0);
         p05 = new Point2D(0.5, 0.5);
@@ -144,6 +195,10 @@ public class KdTree {
         StdOut.println(kdtree.contains(p05));
         StdOut.println(kdtree.contains(p1));
         StdOut.println(kdtree.contains(new Point2D(0.851309, 0.881449)));
+        StdOut.println(kdtree.contains(new Point2D(0.756544, 0.417366)));
+        StdOut.println(kdtree.contains(new Point2D(0.785370, 0.652338)));
+        StdOut.println(kdtree.contains(new Point2D(0.406360, 0.678100)));
 //        StdOut.println(kdtree.contains(new Point2D(0.147733,0.203388)));
+*/
     }
 }
