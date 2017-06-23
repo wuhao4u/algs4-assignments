@@ -174,7 +174,6 @@ public class KdTree {
 
     // a nearest neighbor in the set to point p; null if the set is empty
     public Point2D nearest(Point2D p) {
-        // TODO
         // start at the root and recursively search in both subtrees
         Point2D nearestPoint = nearest(mRoot, p, null);
 
@@ -191,7 +190,7 @@ public class KdTree {
         // if the closest point discovered so far is closer than the distance between the query point
         // and the rectangle corresponding to a node, there is no need to explore that node (or its subtrees).
 
-        if (target.distanceTo(closestSoFar) < target.distanceTo(node.val)) {
+        if (target.distanceTo(closestSoFar) < node.rect.distanceTo(target)) {
             // That is, a node is searched only if it might contain a point
             // that is closer than the best one found so far.
             return closestSoFar;
