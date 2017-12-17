@@ -27,7 +27,18 @@ public class PointSET {
 
     // add the point to the set (if it is not already in the set)
     public void insert(Point2D p) {
+        // check if the p is in bound
+        if (!inBound(p)) return;
         if (!mSet.contains(p)) mSet.add(p);
+    }
+
+    private boolean inBound(Point2D p) {
+        if (Double.compare(p.x(), 0) < 0
+                || Double.compare(p.x(), 1.0) > 0
+                || Double.compare(p.y(), 0.0) < 0
+                || Double.compare(p.y(), 1.0) > 0)
+            return false;
+        else return true;
     }
 
     // does the set contain point p?
@@ -65,8 +76,8 @@ public class PointSET {
         Point2D currentMinPoint = new Point2D(-1., -1.);
 
         for (Point2D p0 : mSet) {
-            if (p.distanceTo(p0) < currentMinDistance) {
-                currentMinDistance = p.distanceTo(p0);
+            if (p.distanceSquaredTo(p0) < currentMinDistance) {
+                currentMinDistance = p.distanceSquaredTo(p0);
                 currentMinPoint = p0;
             }
         }
@@ -75,6 +86,7 @@ public class PointSET {
 
     // unit testing of the methods (optional)
     public static void main(String[] args) {
+        /*
         // test insert(), isempty(), size()
         String filename = args[0];
         In in = new In(filename);
@@ -97,8 +109,8 @@ public class PointSET {
         // test contains()
         StdOut.println("---test contains---");
         StdOut.printf("contains 0,0? %b\n", brute.contains(new Point2D(0, 0)));
-        StdOut.printf("contains 1,1? %b\n", brute.contains(new Point2D(1,1)));
-        StdOut.printf("contains random point exists? %b\n", brute.contains(new Point2D(0.851309 ,0.881449)));
+        StdOut.printf("contains 1,1? %b\n", brute.contains(new Point2D(1, 1)));
+        StdOut.printf("contains random point exists? %b\n", brute.contains(new Point2D(0.851309, 0.881449)));
         StdOut.printf("contains random point? %b\n", brute.contains(new Point2D(0.5, 0.5)));
 
         StdDraw.enableDoubleBuffering();
@@ -126,5 +138,6 @@ public class PointSET {
         StdOut.printf("Nearest to the point 0,0 is (%f, %f)\n", np0.x(), np0.y());
         StdOut.printf("Nearest to the point center is (%f, %f)\n", np05.x(), np05.y());
         StdOut.printf("Nearest to the point 1,1 is (%f, %f)\n", np1.x(), np1.y());
+        */
     }
 }

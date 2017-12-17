@@ -8,12 +8,14 @@ import java.util.TreeSet;
  * Created by wuhao on 2017-06-20.
  */
 public class KdTree {
+    private Node mRoot;
+    private int mSize;
+
     private static class Node {
         private Point2D val;      // the point
         private RectHV rect;    // the axis-aligned rectangle corresponding to this node
         private Node lb;        // the left/bottom subtree
         private Node rt;        // the right/top subtree
-        private double key;
 
         public Node(Point2D p, RectHV rect, Node ln, Node rn) {
             this.val = p;
@@ -23,13 +25,8 @@ public class KdTree {
         }
     }
 
-    private Node mRoot;
-    private int mSize;
-    private static boolean mVertical; // flag for horizontal or vertical, true, 1 for vertical, false, 0 for horizontal
-
     // construct an empty set of points
     public KdTree() {
-        mVertical = true; // 1st should be vertical
         mSize = 0;
     }
 
@@ -49,28 +46,44 @@ public class KdTree {
         return n != null;
     }
 
-    private Node get(Node n, Point2D p, boolean isVertical) {
+    private Node get(Node node, Point2D target, boolean isVertical) {
         // the base case, if the point does not exists in the tree
-        if (n == null) return null;
-        int cmp;
+        if (node == null) return null;
 
-        if (isVertical) {
-            cmp = Double.compare(p.x(), n.val.x());
-        } else {
-            cmp = Double.compare(p.y(), n.val.y());
+        // if the node is equal to the target point
+        if (target.compareTo(node.val) == 0) {
+            return node;
         }
-        if (cmp < 0) return get(n.lb, p, !isVertical);
-        if (cmp > 0) return get(n.rt, p, !isVertical);
-        else return n;
+
+        int cmp;
+        if (isVertical) {
+            cmp = Double.compare(target.x(), node.val.x());
+        } else {
+            cmp = Double.compare(target.y(), node.val.y());
+        }
+        if (cmp < 0) return get(node.lb, target, !isVertical);
+        if (cmp >= 0) return get(node.rt, target, !isVertical);
+
+        return null;
     }
 
     // add the point to the set (if it is not already in the set)
     public void insert(Point2D p) {
-        if (p == null) throw new NullPointerException("Where is my point?");
+        if (p == null || !inBound(p)) return;
+
         if (contains(p)) return;
 
         // alternate with x and y coordinates as p while inserting
         mRoot = put(mRoot, p, true, new RectHV(0, 0, 1, 1));
+    }
+
+    private boolean inBound(Point2D p) {
+        if (Double.compare(p.x(), 0) < 0
+                || Double.compare(p.x(), 1.0) > 0
+                || Double.compare(p.y(), 0.0) < 0
+                || Double.compare(p.y(), 1.0) > 0)
+            return false;
+        else return true;
     }
 
     // x: parent node
@@ -78,7 +91,10 @@ public class KdTree {
     // hv: orientation of the new node
     private Node put(Node n, Point2D p, boolean isVertical, RectHV parentRect) {
         // root node has no parent node
-        if (n == null) return new Node(p, parentRect, null, null);
+        if (n == null) {
+            mSize++;
+            return new Node(p, parentRect, null, null);
+        }
 
         int cmp;
         RectHV rhv;
@@ -88,7 +104,6 @@ public class KdTree {
         } else {
             cmp = Double.compare(p.y(), n.val.y());
         }
-
 
         if (cmp < 0) {
             if (isVertical) {
@@ -154,7 +169,7 @@ public class KdTree {
         // if the query rectangle does not intersect the rectangle corresponding to a node,
         // there is no need to explore that node (or its subtrees).
         // A subtree is searched only if it might contain a point contained in the query rectangle.
-        TreeSet ts = new TreeSet<Point2D>();
+        TreeSet<Point2D> ts = new TreeSet<>();
 
         range(mRoot, rect, ts);
 
@@ -190,11 +205,11 @@ public class KdTree {
         // if the closest point discovered so far is closer than the distance between the query point
         // and the rectangle corresponding to a node, there is no need to explore that node (or its subtrees).
 
-        if (target.distanceTo(closestSoFar) < node.rect.distanceTo(target)) {
+        if (target.distanceSquaredTo(closestSoFar) < node.rect.distanceSquaredTo(target)) {
             // That is, a node is searched only if it might contain a point
             // that is closer than the best one found so far.
             return closestSoFar;
-        } else if (target.distanceTo(node.val) < target.distanceTo(closestSoFar)) {
+        } else if (target.distanceSquaredTo(node.val) < target.distanceSquaredTo(closestSoFar)) {
             // if current node's point is closer to the argument one, replace it
             closestSoFar = node.val;
         }
@@ -208,7 +223,7 @@ public class KdTree {
 
         if (node.lb != null && node.rt != null) {
             Point2D closeSideRes, farSideRes;
-            if (target.distanceTo(node.lb.val) < target.distanceTo(node.rt.val)) {
+            if (target.distanceSquaredTo(node.lb.val) < target.distanceSquaredTo(node.rt.val)) {
                 // left-below side is closer to the targeting point
                 closeSideRes = nearest(node.lb, target, closestSoFar);
                 farSideRes = nearest(node.rt, target, closestSoFar);
@@ -218,7 +233,7 @@ public class KdTree {
                 farSideRes = nearest(node.lb, target, closestSoFar);
             }
 
-            closestSoFar = (target.distanceTo(closeSideRes) < target.distanceTo(farSideRes)) ? closeSideRes : farSideRes;
+            closestSoFar = (target.distanceSquaredTo(closeSideRes) < target.distanceSquaredTo(farSideRes)) ? closeSideRes : farSideRes;
         } else if (node.lb != null) {
             closestSoFar = nearest(node.lb, target, closestSoFar);
         } else if (node.rt != null) {
@@ -230,11 +245,16 @@ public class KdTree {
 
     // unit testing of the methods (optional)
     public static void main(String[] args) {
+         /*
         String filename = args[0];
         In in = new In(filename);
 
         // initialize the data structures with N points from standard input
         KdTree kdtree = new KdTree();
+
+        StdOut.println("---after insert---");
+        StdOut.println("size: " + kdtree.size());
+        StdOut.println("is empty: " + kdtree.isEmpty());
 
         while (!in.isEmpty()) {
             double x = in.readDouble();
@@ -242,6 +262,11 @@ public class KdTree {
             Point2D p = new Point2D(x, y);
             kdtree.insert(p);
         }
+
+        // test insert, size(), isEmpty()
+        StdOut.println("---after insert---");
+        StdOut.println("size: " + kdtree.size());
+        StdOut.println("is empty: " + kdtree.isEmpty());
 
 //        StdDraw.enableDoubleBuffering();
 //        StdOut.println("---test draw---");
@@ -253,14 +278,17 @@ public class KdTree {
         p05 = new Point2D(0.5, 0.5);
         p1 = new Point2D(1., 1.);
 
-        /*
         StdOut.println(kdtree.contains(p0));
         StdOut.println(kdtree.contains(p05));
         StdOut.println(kdtree.contains(p1));
-        StdOut.println(kdtree.contains(new Point2D(0.851309, 0.881449)));
-        StdOut.println(kdtree.contains(new Point2D(0.756544, 0.417366)));
-        StdOut.println(kdtree.contains(new Point2D(0.785370, 0.652338)));
-        StdOut.println(kdtree.contains(new Point2D(0.406360, 0.678100)));
+//        StdOut.println(kdtree.contains(new Point2D(0.851309, 0.881449)));
+//        StdOut.println(kdtree.contains(new Point2D(0.756544, 0.417366)));
+//        StdOut.println(kdtree.contains(new Point2D(0.785370, 0.652338)));
+//        StdOut.println(kdtree.contains(new Point2D(0.406360, 0.678100)));
+
+        StdOut.println(kdtree.contains(new Point2D(0.9, 0.6)));
+        StdOut.println(kdtree.contains(new Point2D(0.7, 0.2)));
+        StdOut.println(kdtree.contains(new Point2D(0.2, 0.3)));
 
         // test range
         StdOut.println("---test range---");
@@ -272,11 +300,11 @@ public class KdTree {
 
         StdOut.println("Number of points in the left half: " + leftHalfPoints.size());
         StdOut.println("Number of points in the right half: " + rightHalfPoints.size());
-*/
 
         // test nearest
         StdOut.println("closest to point " + p0.toString() + "is point " + kdtree.nearest(p0).toString());
         StdOut.println("closest to point " + p05.toString() + "is point " + kdtree.nearest(p05).toString());
         StdOut.println("closest to point " + p1.toString() + "is point " + kdtree.nearest(p1).toString());
+        */
     }
 }
