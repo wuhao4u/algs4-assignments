@@ -1,17 +1,14 @@
 import edu.princeton.cs.algs4.BreadthFirstDirectedPaths;
 import edu.princeton.cs.algs4.Digraph;
-import edu.princeton.cs.algs4.In;
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class SAP {
-    Digraph G;
-
-    // TODO: save known lcs (v,w) in a matrix? Memoize
+    private final Digraph G;
 
     // constructor takes a digraph (not necessarily a DAG)
-    public SAP(Digraph G) {
-        this.G = G;
+    public SAP(Digraph graph) {
+        this.G = graph;
     }
 
     private boolean isValid(Digraph G, int v) {
@@ -19,9 +16,9 @@ public class SAP {
     }
 
 
-    private boolean isValid(Digraph G, Iterable<Integer> vertices) {
+    private boolean isValid(Digraph graph, Iterable<Integer> vertices) {
         for (Integer v : vertices) {
-            if (!isValid(G, v)) {
+            if (!isValid(graph, v)) {
                 return false;
             }
         }
@@ -149,6 +146,7 @@ public class SAP {
 
     // do unit testing of this class
     public static void main(String[] args) {
+        /*
         In in = new In(args[0]);
         Digraph G = new Digraph(in);
         SAP sap = new SAP(G);
@@ -159,5 +157,6 @@ public class SAP {
             int ancestor = sap.ancestor(v, w);
             StdOut.printf("length = %d, ancestor = %d\n", length, ancestor);
         }
+        */
     }
 }

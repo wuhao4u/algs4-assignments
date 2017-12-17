@@ -1,32 +1,20 @@
+import edu.princeton.cs.algs4.DirectedCycle;
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Digraph;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.StringTokenizer;
+import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HashMap;
 
 public class WordNet {
-    class Synonym {
-        int id;
+    private final ArrayList<LinkedList<String>> synset; // get words with ID
+    private final HashMap<String, LinkedList<Integer>> ids; // get ids with string
+    private final HashSet<String> nouns; // doest the word exists?
 
-        // each id match to multiple nouns
-        String[] synonyms;
-        String definition;
-
-        // Stores all parents' hypernyms ID
-        Set<Integer> hypernyms;
-
-        public Synonym(int id, String[] synonyms, String definition) {
-            this.id = id;
-            this.synonyms = synonyms;
-            this.definition = definition;
-
-            hypernyms = new HashSet<Integer>();
-        }
-    }
-
-    HashMap<Integer, Synonym> synonyms;
-    Digraph G;
-    SAP sap;
+    //    Digraph G;
+    private final SAP sap;
 
     // constructor takes the name of the two input files
     // runtime: O(n)
@@ -36,79 +24,56 @@ public class WordNet {
             throw new IllegalArgumentException("Wrong WordNet input.");
         }
 
-        this.synonyms = new HashMap<Integer, Synonym>();
+        synset = new ArrayList<LinkedList<String>>();
+        ids = new HashMap<String, LinkedList<Integer>>();
 
-        // read synsets.txt
-        Scanner synScanner, hyperScanner;
+        In s = new In(synsets);
 
-        // 2 CSV files
-        // 1. synsets.txt : lists all noun in WordNet.
-        // format: id,synset1 synset2,definition
-        // vertices
-        try {
-            synScanner = new Scanner(new File(synsets));
+        while (s.hasNextLine()) {
+            StringTokenizer st = new StringTokenizer(s.readLine(), ",");
 
-            while (synScanner.hasNextLine()) {
-                String line = synScanner.nextLine();
-                String[] splitedLine = line.split(",");
+            int id = Integer.parseInt(st.nextToken());
+            LinkedList<String> set = new LinkedList<String>();
+            StringTokenizer sst = new StringTokenizer(st.nextToken());
 
-                int id = Integer.valueOf(splitedLine[0]);
-                String[] syns = splitedLine[1].split(" ");
-                String definition = splitedLine[2];
+            while (sst.hasMoreTokens()) {
+                String noun = sst.nextToken();
+                set.add(noun);
 
-                this.synonyms.put(id, new Synonym(id, syns, definition));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Synset file not found.");
-        }
-
-
-        // create a Digraph based on the input
-        // syn for vertices, hypernyms for edges
-        this.G = new Digraph(this.synonyms.size());
-
-
-        // read hypernyms.txt
-        // 2. hypernyms.txt : hypernym relationships
-        // format: id,parent1ID,parent2ID
-        // edges in the graph
-        try {
-            hyperScanner = new Scanner(new File(hypernyms));
-
-            while (hyperScanner.hasNextLine()) {
-                String[] splitedLine = hyperScanner.nextLine().split(",");
-                int id = Integer.parseInt(splitedLine[0]);
-
-                Synonym child = this.synonyms.get(id);
-                int parentID = -1;
-
-                for (int i = 1; i < splitedLine.length; ++i) {
-                    parentID = Integer.valueOf(splitedLine[i]);
-                    child.hypernyms.add(parentID);
-
-                    G.addEdge(id, parentID);
+                if (ids.get(noun) == null) {
+                    ids.put(noun, new LinkedList<Integer>());
                 }
 
+                ids.get(noun).add(id);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Hyper file not found.");
+            synset.add(set);
         }
 
+        nouns = new HashSet<String>(ids.keySet());
+        Digraph G = new Digraph(synset.size());
 
-        this.sap = new SAP(this.G);
+
+        In h = new In(hypernyms);
+        while (h.hasNextLine()) {
+            StringTokenizer st = new StringTokenizer(h.readLine(), ",");
+            int id = Integer.parseInt(st.nextToken());
+            while (st.hasMoreTokens()) {
+                int hyper = Integer.parseInt(st.nextToken());
+                G.addEdge(id, hyper);
+            }
+        }
+
+        DirectedCycle dc = new DirectedCycle(G);
+        if (dc.hasCycle()) {
+            throw new IllegalArgumentException("Has cycle");
+        }
+
+        sap = new SAP(G);
     }
 
     // returns all WordNet nouns
     public Iterable<String> nouns() {
-        ArrayList<String> result = new ArrayList<String>(this.synonyms.size());
-
-        for (Synonym s : this.synonyms.values()) {
-            for (String n : s.synonyms) {
-                result.add(n);
-            }
-        }
-
-        return result;
+        return nouns;
     }
 
     // is the word a WordNet noun?
@@ -118,7 +83,7 @@ public class WordNet {
             throw new IllegalArgumentException("Wrong isNoun input.");
         }
 
-        return this.synonyms.containsValue(word);
+        return nouns.contains(word);
     }
 
     // distance between nounA and nounB (defined below)
@@ -128,8 +93,7 @@ public class WordNet {
             throw new IllegalArgumentException("Wrong distance input!");
         }
 
-        // TODO, 2
-        return 0;
+        return sap.length(ids.get(nounA), ids.get(nounB));
     }
 
     // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB
@@ -141,43 +105,34 @@ public class WordNet {
             throw new IllegalArgumentException("Wrong sap input!");
         }
 
-        // TODO, test me
-        int v, w;
-        v = getSynID(nounA);
-        w = getSynID(nounB);
+        LinkedList<Integer> v, w;
+        v = ids.get(nounA);
+        w = ids.get(nounB);
 
         int lcsID = this.sap.ancestor(v, w);
         if (lcsID == -1) {
             return null;
         } else {
-            String[] synset = this.synonyms.get(lcsID).synonyms;
-            String result = String.join(" ", synset);
-            return result;
-        }
-    }
+            LinkedList<String> synsWithID = this.synset.get(lcsID);
+            StringBuilder sb = new StringBuilder();
 
-    protected int getSynID(String noun) {
-        Synonym syns;
-        for (Map.Entry pair : this.synonyms.entrySet()) {
-            syns = (Synonym) pair.getValue();
+            // if there are some syns
+            if (!synsWithID.isEmpty()) {
+                sb.append(synsWithID.get(0));
 
-            for (String s : syns.synonyms) {
-                if (s.equals(noun)) {
-                    return (Integer) pair.getKey();
+                for (int i = 1; i < synsWithID.size(); ++i) {
+                    sb.append(' ');
+                    sb.append(synsWithID.get(i));
                 }
             }
+
+
+            return sb.toString();
         }
-
-        return -1;
     }
-
 
     // do unit testing of this class
     public static void main(String[] args) {
         // create wordnet digraph
-
-
-        WordNet wordnet = new WordNet(args[0], args[1]);
-
     }
 }
