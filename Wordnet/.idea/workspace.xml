@@ -1,61 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdb91a53-2579-48d1-b2d5-0bacff6c1856" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
+    <list default="true" id="bdb91a53-2579-48d1-b2d5-0bacff6c1856" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/Seam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/Seam.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/src/SeamCarver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/src/SeamCarver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/tests/PrintEnergy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/tests/PrintSeams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/tests/ResizeDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/tests/SCUtility.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/tests/ShowEnergy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Seam/tests/ShowSeams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordnet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Wordnet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph-ambiguous-ancestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph-wordnet.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms100-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms1000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms10000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms100K.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms11AmbiguousAncestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms11ManyPathsOneAncestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms15Path.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms15Tree.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms200K.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms300K.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms3InvalidCycle.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms3InvalidTwoRoots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms500-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms5000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms50000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6InvalidCycle+Path.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6InvalidCycle.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6InvalidTwoRoots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6TwoAncestors.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms8ManyAncestors.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms8WrongBFS.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernymsManyPathsOneAncestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast10a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast11.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast12.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast12a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast17.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast29.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast5a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8b.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8c.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast9a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets100-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets1000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets10000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets11.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets15.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets500-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets5000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets50000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SAP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SAP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WordNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordNet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WordNet.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/WordNet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1262#1270#0" expanded="true" />
-                <element signature="e#2401#2402#0" expanded="true" />
-                <element signature="e#2429#2430#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SAP.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SAP.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="13" column="46" lean-forward="false" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#288#289#0" expanded="true" />
-                <element signature="e#318#319#0" expanded="true" />
-                <element signature="e#414#415#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Outcast.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Outcast.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-              <folding>
-                <element signature="e#137#138#0" expanded="true" />
-                <element signature="e#175#176#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -64,95 +102,26 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>this.nouns</find>
-      <find>getInteger</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>this.synonyms</replace>
-    </replaceStrings>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/Outcast.java" />
-        <option value="$PROJECT_DIR$/src/SAP.java" />
-        <option value="$PROJECT_DIR$/src/WordNet.java" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="199" />
-    <option name="y" value="22" />
-    <option name="width" value="1920" />
-    <option name="height" value="878" />
-  </component>
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Wordnet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Wordnet" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Wordnet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Wordnet" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Wordnet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="Wordnet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="algs4" type="70bed36:NamedLibraryElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-    </panes>
-  </component>
+  <component name="ProjectId" id="1SzfuTpUR82WtCsE3V8YCAPKASW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -166,79 +135,52 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Outcast">
+  <component name="RunManager" selected="Application.WordNet">
     <configuration name="Outcast" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Outcast" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="./wordnetTests/synsets.txt ./wordnetTests/hypernyms.txt ./wordnetTests/outcast5.txt ./wordnetTests/outcast8.txt ./wordnetTests/outcast11.txt" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <module name="Wordnet" />
-      <envs />
+      <option name="PROGRAM_PARAMETERS" value="./wordnetTests/synsets.txt ./wordnetTests/hypernyms.txt ./wordnetTests/outcast5.txt ./wordnetTests/outcast8.txt ./wordnetTests/outcast11.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="SAP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="SAP" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="./wordnetTests/digraph1.txt" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <module name="Wordnet" />
-      <envs />
+      <option name="PROGRAM_PARAMETERS" value="./wordnetTests/digraph1.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Temp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Temp" />
+      <module name="Wordnet" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="WordNet" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="WordNet" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="./wordnetTests/synsets15.txt ./wordnetTests/hypernyms15Path.txt" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <module name="Wordnet" />
-      <envs />
+      <option name="PROGRAM_PARAMETERS" value="./wordnetTests/synsets15.txt ./wordnetTests/hypernyms15Path.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Application.WordNet" />
-      <item index="1" class="java.lang.String" itemvalue="Application.SAP" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Outcast" />
+    <list>
+      <item itemvalue="Application.WordNet" />
+      <item itemvalue="Application.SAP" />
+      <item itemvalue="Application.Outcast" />
+      <item itemvalue="Application.Temp" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Application.Outcast" />
-        <item index="1" class="java.lang.String" itemvalue="Application.SAP" />
-        <item index="2" class="java.lang.String" itemvalue="Application.WordNet" />
+      <list>
+        <item itemvalue="Application.WordNet" />
+        <item itemvalue="Application.Temp" />
+        <item itemvalue="Application.Outcast" />
+        <item itemvalue="Application.SAP" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -252,229 +194,26 @@
       <updated>1513290881766</updated>
       <workItem from="1513290884164" duration="44223000" />
       <workItem from="1513548636227" duration="3107000" />
+      <workItem from="1572571570150" duration="7073000" />
+      <workItem from="1572903920144" duration="892000" />
+      <workItem from="1573047505399" duration="1536000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47330000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="4" y="22" width="1436" height="878" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1341853" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5347871" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="17" />
-    </breakpoint-manager>
-    <watches-manager />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/WordNet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1262#1270#0" expanded="true" />
-            <element signature="e#2401#2402#0" expanded="true" />
-            <element signature="e#2429#2430#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SAP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2584">
-          <caret line="160" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="160" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#288#289#0" expanded="true" />
-            <element signature="e#318#319#0" expanded="true" />
-            <element signature="e#414#415#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../libs/algs4.jar!/edu/princeton/cs/algs4/BreadthFirstDirectedPaths.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../libs/algs4.jar!/edu/princeton/cs/algs4/Digraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="jar://$PROJECT_DIR$/../libs/algs4.jar!/edu/princeton/cs/algs4/BreadthFirstDirectedPaths.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="897">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../libs/algs4.jar!/edu/princeton/cs/algs4/Digraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Outcast.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-          <folding>
-            <element signature="e#137#138#0" expanded="true" />
-            <element signature="e#175#176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SAP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="13" column="46" lean-forward="false" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#288#289#0" expanded="true" />
-            <element signature="e#318#319#0" expanded="true" />
-            <element signature="e#414#415#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/WordNet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1262#1270#0" expanded="true" />
-            <element signature="e#2401#2402#0" expanded="true" />
-            <element signature="e#2429#2430#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Wordnet</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>algs4</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

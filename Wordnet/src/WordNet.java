@@ -30,6 +30,9 @@ public class WordNet {
         In s = new In(synsets);
 
         while (s.hasNextLine()) {
+            // synset: ID,synset,dictionary definition
+            // synset: ASCII_character word2 word3
+            // word1 separated by '_'
             StringTokenizer st = new StringTokenizer(s.readLine(), ",");
 
             int id = Integer.parseInt(st.nextToken());
@@ -52,7 +55,7 @@ public class WordNet {
         nouns = new HashSet<String>(ids.keySet());
         Digraph G = new Digraph(synset.size());
 
-
+        // process hypernyms file
         In h = new In(hypernyms);
         while (h.hasNextLine()) {
             StringTokenizer st = new StringTokenizer(h.readLine(), ",");
@@ -134,5 +137,8 @@ public class WordNet {
     // do unit testing of this class
     public static void main(String[] args) {
         // create wordnet digraph
+        WordNet wn = new WordNet("wordnetTests/synsets100-subgraph.txt",
+                "wordnetTests/hypernyms100-subgraph.txt");
+//        WordNet wn = new WordNet("synsets100-subgraph.txt", "hypernyms100-subgraph.txt");
     }
 }

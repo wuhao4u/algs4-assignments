@@ -1,113 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f495f243-d087-451d-8adf-2ea3058252a8" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
+    <list default="true" id="c117155e-ef0a-4db1-886b-b24dd69462d1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Seam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Seam.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SeamCarver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SeamCarver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/PrintEnergy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/PrintSeams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ResizeDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/SCUtility.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ShowEnergy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ShowSeams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/Wordnet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/Wordnet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph-ambiguous-ancestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph-wordnet.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms100-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms1000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms10000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms100K.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms11AmbiguousAncestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms11ManyPathsOneAncestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms15Path.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms15Tree.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms200K.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms300K.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms3InvalidCycle.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms3InvalidTwoRoots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms500-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms5000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms50000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6InvalidCycle+Path.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6InvalidCycle.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6InvalidTwoRoots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6TwoAncestors.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms8ManyAncestors.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms8WrongBFS.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernymsManyPathsOneAncestor.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast10a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast11.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast12.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast12a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast17.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast29.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast5a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8b.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8c.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast9a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets100-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets1000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets10000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets11.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets15.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets500-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets5000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets50000-subgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/src/SAP.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/src/SAP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wordnet/src/WordNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/src/WordNet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SeamCarver.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/SeamCarver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#235#236#0" expanded="true" />
-                <element signature="e#267#268#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>width</find>
-      <find>height</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>this.picture.width()</replace>
-      <replace>this.picture.width()</replace>
-      <replace>this.picture.height()</replace>
-    </replaceStrings>
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/SeamCarver.java" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1810" />
-    <option name="y" value="90" />
-    <option name="width" value="1436" />
-    <option name="height" value="878" />
-  </component>
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Seam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Seam" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
+  <component name="ProjectId" id="1TFcDXWAIE46dp7LIPd79Ga8ewB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -122,204 +123,70 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Seam" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f495f243-d087-451d-8adf-2ea3058252a8" name="Default" comment="" />
-      <created>1513552046037</created>
+      <changelist id="c117155e-ef0a-4db1-886b-b24dd69462d1" name="Default Changelist" comment="" />
+      <created>1573059164204</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1513552046037</updated>
-      <workItem from="1513552047808" duration="5039000" />
+      <updated>1573059164204</updated>
+      <workItem from="1573059165615" duration="533000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5039000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="1440" y="22" width="1920" height="1058" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18530351" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/rt.jar!/java/lang/Object.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SeamCarver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#235#236#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Seam</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>algs4</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

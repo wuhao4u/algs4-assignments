@@ -35,11 +35,11 @@ public class SAP {
         BreadthFirstDirectedPaths vPath = new BreadthFirstDirectedPaths(this.G, v);
         BreadthFirstDirectedPaths wPath = new BreadthFirstDirectedPaths(this.G, w);
 
-        int lcs = ancestor(v, w);
+        int lca = ancestor(v, w);
         // we know the lowest common ancestor
-        if (lcs != -1) {
-            int vDist = vPath.distTo(lcs);
-            int wDist = wPath.distTo(lcs);
+        if (lca != -1) {
+            int vDist = vPath.distTo(lca);
+            int wDist = wPath.distTo(lca);
 
             return vDist + wDist;
         }
@@ -57,24 +57,22 @@ public class SAP {
         BreadthFirstDirectedPaths wPath = new BreadthFirstDirectedPaths(this.G, w);
 
         int shortestLength = Integer.MAX_VALUE;
-        int lcsDist = -1;
-        int lcs = -1;
+        int lcaDist = -1;
+        int lca = -1;
         for (int i = 0; i < G.V(); ++i) {
             if (vPath.hasPathTo(i) && wPath.hasPathTo(i)) {
-//                int vToi = vPath.distTo(i);
-//                int wToi  = wPath.distTo(i);
+                // total distance to lowest common ancestor is "v to lca" + "w to lca"
+                lcaDist = vPath.distTo(i) + wPath.distTo(i);
 
-                lcsDist = vPath.distTo(i) + wPath.distTo(i);
-
-                if (lcsDist < shortestLength) {
+                if (lcaDist < shortestLength) {
                     // this is the new lowest common ancestor
-                    lcs = i;
-                    shortestLength = lcsDist;
+                    lca = i;
+                    shortestLength = lcaDist;
                 }
             }
         }
 
-        return lcs;
+        return lca;
     }
 
 
@@ -88,16 +86,16 @@ public class SAP {
         BreadthFirstDirectedPaths vPath = new BreadthFirstDirectedPaths(this.G, v);
         BreadthFirstDirectedPaths wPath = new BreadthFirstDirectedPaths(this.G, w);
 
-        int lcs = ancestor(v, w);
+        int lca = ancestor(v, w);
 
-        if (lcs == -1) {
+        if (lca == -1) {
             return -1;
         }
 
-        if (vPath.hasPathTo(lcs) && wPath.hasPathTo(lcs)) {
-            // shortest dist for a v to lcs
-            int vToLCS = vPath.distTo(lcs);
-            int wToLCS = wPath.distTo(lcs);
+        if (vPath.hasPathTo(lca) && wPath.hasPathTo(lca)) {
+            // shortest dist for a v to lca
+            int vToLCS = vPath.distTo(lca);
+            int wToLCS = wPath.distTo(lca);
 
             return vToLCS + wToLCS;
         }
@@ -106,7 +104,7 @@ public class SAP {
     }
 
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
-    // Purpose : find lcs out of many Vs and many Ws, and find the smallest lcs out of all
+    // Purpose : find lca out of many Vs and many Ws, and find the smallest lca out of all
     // v, w: path from root to v or w
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
         if (!isValid(G, v) || !isValid(G, w)) {
@@ -130,18 +128,18 @@ public class SAP {
         int shortestLen = Integer.MAX_VALUE;
         int currentLen = Integer.MAX_VALUE;
         int currentAncestor = -1;
-        int lcs = -1;
+        int lca = -1;
         while (!ancestors.isEmpty()) {
             currentAncestor = ancestors.poll();
             currentLen = vPath.distTo(currentAncestor) + wPath.distTo(currentAncestor);
 
             if (currentLen < shortestLen) {
                 shortestLen = currentLen;
-                lcs = currentAncestor;
+                lca = currentAncestor;
             }
         }
 
-        return lcs;
+        return lca;
     }
 
     // do unit testing of this class
