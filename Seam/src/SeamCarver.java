@@ -41,7 +41,7 @@ public class SeamCarver {
         return this.picture.height();
     }
 
-    private boolean isOnBoundary(int r, int c) {
+    private boolean isOnBoundary(int c, int r) {
         if (c == 0 || c == this.picture.width() - 1) {
             return true;
         } else if (r == 0 || r == this.picture.height() - 1) {
@@ -51,7 +51,7 @@ public class SeamCarver {
         }
     }
 
-    private boolean isOutOfBoundries(int r, int c) {
+    private boolean isOutOfBoundries(int c, int r) {
         if (r < 0 || r > this.picture.width() - 1) {
             return true;
         } else if (c < 0 || c > this.picture.height() - 1) {
@@ -61,7 +61,7 @@ public class SeamCarver {
         }
     }
 
-    private int deltaXSquare(int r, int c) {
+    private int deltaXSquare(int c, int r) {
         // c is [1,width]
         // r is [1,height]
         if (c <= 0 || c >= this.picture.width() - 1) throw new IllegalArgumentException("Invalid c value");
@@ -74,7 +74,7 @@ public class SeamCarver {
         return rDiff * rDiff + gDiff * gDiff + bDiff * bDiff;
     }
 
-    private int deltaYSquare(int r, int c) {
+    private int deltaYSquare(int c, int r) {
         if (c < 0 || c > this.picture.width() - 1) throw new IllegalArgumentException("Invalid c value");
         if (r < 0 || r > this.picture.height() - 1) throw new IllegalArgumentException("Invalid r value");
 
@@ -90,10 +90,10 @@ public class SeamCarver {
         if (c < 0 || c > this.picture.width() - 1) throw new IllegalArgumentException("Invalid c value");
         if (r < 0 || r > this.picture.height() - 1) throw new IllegalArgumentException("Invalid r value");
 
-        if (isOnBoundary(r, c)) {
+        if (isOnBoundary(c, r)) {
             return BOUNDARY_ENERGY;
         } else {
-            return Math.sqrt(deltaXSquare(r, c) + deltaYSquare(r, c));
+            return Math.sqrt(deltaXSquare(c, r) + deltaYSquare(c, r));
         }
     }
 
@@ -160,20 +160,20 @@ public class SeamCarver {
                 double newEnergy = distTo[p.c][p.r] + this.energyMatrix[p.c][p.r];
 
                 // try to relax below 3 pixels (x-1, y+1), (x, y+1), (x+1, y+1)
-                if (!isOutOfBoundries(p.r + 1, p.c - 1) && (newEnergy < distTo[p.r + 1][p.c - 1])) {
+                if (!isOutOfBoundries(p.c - 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c - 1])) {
                     // bottom-left pixel can be relaxed
                     distTo[p.r + 1][p.c - 1] = newEnergy;
                     edgeTo[p.r + 1][p.c - 1] = p.c;
                 }
 
-                if (!isOutOfBoundries(p.r + 1, p.c) && (newEnergy < distTo[p.r + 1][p.c])) {
+                if (!isOutOfBoundries(p.c, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c])) {
                     // below pixel
                     distTo[p.r][p.c] = newEnergy;
                     edgeTo[p.r][p.c] = p.c;
                     queue.enqueue(new Point(p.r, p.c));
                 }
 
-                if(!isOutOfBoundries(p.r + 1, p.c + 1) && (newEnergy < distTo[p.r + 1][p.c + 1])) {
+                if (!isOutOfBoundries(p.c + 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c + 1])) {
                     // bottom-right pixel
                     distTo[p.r + 1][p.c + 1] = newEnergy;
                     edgeTo[p.r + 1][p.c + 1] = p.c;
