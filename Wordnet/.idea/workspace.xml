@@ -2,92 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdb91a53-2579-48d1-b2d5-0bacff6c1856" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Seam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/Seam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/Seam.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Seam/src/SeamCarver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Seam/src/SeamCarver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/tests/PrintEnergy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/tests/PrintSeams.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/tests/ResizeDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/tests/SCUtility.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/tests/ShowEnergy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Seam/tests/ShowSeams.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordnet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Wordnet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph-ambiguous-ancestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph-wordnet.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/digraph9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms100-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms1000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms10000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms100K.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms11AmbiguousAncestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms11ManyPathsOneAncestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms15Path.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms15Tree.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms200K.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms300K.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms3InvalidCycle.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms3InvalidTwoRoots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms500-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms5000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms50000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6InvalidCycle+Path.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6InvalidCycle.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6InvalidTwoRoots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms6TwoAncestors.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms8ManyAncestors.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernyms8WrongBFS.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/hypernymsManyPathsOneAncestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast10a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast12a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast5a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8b.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast8c.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/outcast9a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets100-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets1000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets10000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets500-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets5000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets50000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/Wordnet/synsets8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SAP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SAP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WordNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +113,7 @@
       <workItem from="1513548636227" duration="3107000" />
       <workItem from="1572571570150" duration="7073000" />
       <workItem from="1572903920144" duration="892000" />
-      <workItem from="1573047505399" duration="1536000" />
+      <workItem from="1573047505399" duration="1739000" />
     </task>
     <servers />
   </component>

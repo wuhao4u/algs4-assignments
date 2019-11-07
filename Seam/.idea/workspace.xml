@@ -2,92 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c117155e-ef0a-4db1-886b-b24dd69462d1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/ao-ti.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/boo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/fan-gao.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/godfather.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Seam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Seam.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SeamCarver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SeamCarver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/PrintEnergy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/PrintSeams.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ResizeDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/SCUtility.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ShowEnergy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ShowSeams.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/10x10.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/10x10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/10x10.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/10x10.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/10x12.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/10x12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/10x12.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/10x12.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/12x10.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/12x10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/12x10.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/12x10.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/1x1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/1x1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/1x8.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/1x8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/3x4.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/3x4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/3x4.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/3x4.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/3x7.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/3x7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/3x7.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/3x7.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/4x6.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/4x6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/4x6.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/4x6.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/5x6.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/5x6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/5x6.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/5x6.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/6x5.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/6x5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/6x5.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/6x5.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/7x10.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/7x10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/7x10.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/7x10.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/7x3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/7x3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/7x3.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/7x3.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/8x1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/8x1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/HJocean.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HJocean.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/HJoceanTransposed.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HJoceanTransposed.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/chameleon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/chameleon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/diagonals.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/diagonals.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/diagonals.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/diagonals.printseams.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/stripes.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/stripes.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/stripes.printseams.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/stripes.printseams.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Wordnet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/Wordnet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/Wordnet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph-ambiguous-ancestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph-wordnet.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/digraph9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms100-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms1000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms10000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms100K.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms11AmbiguousAncestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms11ManyPathsOneAncestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms15Path.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms15Tree.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms200K.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms300K.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms3InvalidCycle.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms3InvalidTwoRoots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms500-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms5000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms50000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6InvalidCycle+Path.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6InvalidCycle.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6InvalidTwoRoots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms6TwoAncestors.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms8ManyAncestors.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernyms8WrongBFS.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/hypernymsManyPathsOneAncestor.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast10a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast12a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast17.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast29.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast5a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8b.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast8c.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/outcast9a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets100-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets1000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets10000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets500-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets5000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets50000-subgraph.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/out/test/Wordnet/synsets8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/src/SAP.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/src/SAP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Wordnet/src/WordNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wordnet/src/WordNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,13 +51,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1TFcDXWAIE46dp7LIPd79Ga8ewB" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -122,9 +83,65 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.PrintEnergy-34">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintEnergy-1210" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PrintEnergy" />
+      <module name="Seam" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;resources/12x10.png&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintEnergy-34" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PrintEnergy" />
+      <module name="Seam" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;resources/3x4.png&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintEnergy-46" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PrintEnergy" />
+      <module name="Seam" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;resources/4x6.png&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintEnergy-ao-ti" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PrintEnergy" />
+      <module name="Seam" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;resources/ao-ti.JPG&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintEnergy-chameleon" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="PrintEnergy" />
+      <module name="Seam" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;resources/chameleon.png&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintEnergy-fan-gao" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PrintEnergy" />
+      <module name="Seam" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;resources/fan-gao.JPG&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintEnergy-godfather" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PrintEnergy" />
+      <module name="Seam" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;resources/godfather.jpg&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -160,6 +177,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.PrintEnergy-ao-ti" />
+      <item itemvalue="Application.PrintEnergy-fan-gao" />
+      <item itemvalue="Application.PrintEnergy-godfather" />
+      <item itemvalue="Application.PrintEnergy-34" />
+      <item itemvalue="Application.PrintEnergy-46" />
+      <item itemvalue="Application.PrintEnergy-1210" />
+      <item itemvalue="Application.PrintEnergy-chameleon" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PrintEnergy-chameleon" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -171,7 +202,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1573059164204</updated>
-      <workItem from="1573059165615" duration="533000" />
+      <workItem from="1573059165615" duration="20470000" />
     </task>
     <servers />
   </component>
@@ -188,5 +219,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
