@@ -3,6 +3,7 @@ import edu.princeton.cs.algs4.Queue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class SeamCarver {
@@ -52,9 +53,9 @@ public class SeamCarver {
     }
 
     private boolean isOutOfBoundries(int c, int r) {
-        if (r < 0 || r > this.picture.width() - 1) {
+        if (r < 0 || r > this.picture.height() - 1) {
             return true;
-        } else if (c < 0 || c > this.picture.height() - 1) {
+        } else if (c < 0 || c > this.picture.width() - 1) {
             return true;
         } else {
             return false;
@@ -102,7 +103,7 @@ public class SeamCarver {
 
         for (int r = 0; r < height(); ++r) {
             for (int c = 0; c < width(); ++c) {
-                energyMatrix[r][c] = this.energy(r, c);
+                energyMatrix[r][c] = this.energy(c, r);
             }
         }
 
@@ -157,29 +158,49 @@ public class SeamCarver {
                 Point p = queue.dequeue();
 
                 // next pixel's energy will be sum(previous PXs) + E(x, y)
-                double newEnergy = distTo[p.c][p.r] + this.energyMatrix[p.c][p.r];
+                double newEnergy = distTo[p.r][p.c] + this.energyMatrix[p.r][p.c];
 
                 // try to relax below 3 pixels (x-1, y+1), (x, y+1), (x+1, y+1)
-                if (!isOutOfBoundries(p.c - 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c - 1])) {
-                    // bottom-left pixel can be relaxed
-                    distTo[p.r + 1][p.c - 1] = newEnergy;
-                    edgeTo[p.r + 1][p.c - 1] = p.c;
+//                if (!isOutOfBoundries(p.c - 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c - 1])) {
+                if (!isOutOfBoundries(p.c - 1, p.r + 1)) {
+                    if (newEnergy < distTo[p.r + 1][p.c - 1]) {
+                        // bottom-left pixel can be relaxed
+                        distTo[p.r + 1][p.c - 1] = newEnergy;
+                        edgeTo[p.r + 1][p.c - 1] = p.c;
+                        queue.enqueue(new Point(p.r + 1, p.c - 1));
+                    }
                 }
 
-                if (!isOutOfBoundries(p.c, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c])) {
-                    // below pixel
-                    distTo[p.r][p.c] = newEnergy;
-                    edgeTo[p.r][p.c] = p.c;
-                    queue.enqueue(new Point(p.r, p.c));
+//                if (!isOutOfBoundries(p.c, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c])) {
+                if (!isOutOfBoundries(p.c, p.r + 1)) {
+                    if (newEnergy < distTo[p.r + 1][p.c]) {
+                        // below pixel
+                        distTo[p.r + 1][p.c] = newEnergy;
+                        edgeTo[p.r + 1][p.c] = p.c;
+                        queue.enqueue(new Point(p.r + 1, p.c));
+                    }
                 }
 
-                if (!isOutOfBoundries(p.c + 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c + 1])) {
-                    // bottom-right pixel
-                    distTo[p.r + 1][p.c + 1] = newEnergy;
-                    edgeTo[p.r + 1][p.c + 1] = p.c;
-                    queue.enqueue(new Point(p.r + 1, p.c + 1));
+//                if (!isOutOfBoundries(p.c + 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c + 1])) {
+                if (!isOutOfBoundries(p.c + 1, p.r + 1)) {
+                    if (newEnergy < distTo[p.r + 1][p.c + 1]) {
+                        // bottom-right pixel
+                        distTo[p.r + 1][p.c + 1] = newEnergy;
+                        edgeTo[p.r + 1][p.c + 1] = p.c;
+                        queue.enqueue(new Point(p.r + 1, p.c + 1));
+                    }
                 }
             }
+
+            System.out.println("Dist To matrix:");
+            PrintUtil.printDoubleMatrix(distTo);
+
+            System.out.println(PrintUtil.SEPARATOR);
+
+            System.out.println("Edge To matrix:");
+            PrintUtil.printIntMatrix(edgeTo);
+
+            System.out.println(PrintUtil.SEPARATOR);
         }
 
 
@@ -200,14 +221,24 @@ public class SeamCarver {
         }
 
         // trace back
-        int prevSeamIndex = edgeTo[height() - 1][minSeamIndex];
+        /*
+        List<Integer> edgeToRes = new LinkedList<>();
         int curRow = height() - 1;
-        seam[curRow] = minSeamIndex; // bottom row's pixel
-
+        int nextIndex = minSeamIndex;
+        edgeToRes.add(minSeamIndex);
         while (curRow > 0) {
-            // TODO: verify this logic
-            seam[curRow - 1] = edgeTo[curRow][prevSeamIndex];
-            prevSeamIndex = edgeTo[curRow - 1][prevSeamIndex];
+            edgeToRes.add(edgeTo[curRow][nextIndex]);
+            nextIndex = edgeTo[curRow][nextIndex];
+            curRow--;
+        }
+
+         */
+        int curRow = height() - 1;
+        int nextIndex = minSeamIndex;
+        seam[curRow] = minSeamIndex;
+        while (curRow > 0) {
+            seam[curRow - 1] = edgeTo[curRow][nextIndex];
+            nextIndex = edgeTo[curRow][nextIndex];
             curRow--;
         }
 
