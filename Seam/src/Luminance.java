@@ -9,6 +9,8 @@
  *
  ******************************************************************************/
 
+import edu.princeton.cs.algs4.StdOut;
+
 import java.awt.Color;
 
 public class Luminance {

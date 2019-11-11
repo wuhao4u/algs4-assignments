@@ -152,7 +152,6 @@ public class SeamCarver {
             // try start from every entry in the top row
 
             queue.enqueue(new Point(0, c));
-            // TODO: relax on the road
 
             while (!queue.isEmpty()) {
                 Point p = queue.dequeue();
@@ -245,11 +244,14 @@ public class SeamCarver {
         return seam;
     }
 
+
     // sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
         // TODO: step 4
         // use findVerticalSeam(), with transposed images
         // left->right path with fewest energy
+
+        // transpose image
 
         return null;
     }
