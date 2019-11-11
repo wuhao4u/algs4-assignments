@@ -42,20 +42,21 @@ public class SeamCarver {
         return this.picture.height();
     }
 
+
     private boolean isOnBoundary(int c, int r) {
-        if (c == 0 || c == this.picture.width() - 1) {
+        if (c == 0 || c == width() - 1) {
             return true;
-        } else if (r == 0 || r == this.picture.height() - 1) {
+        } else if (r == 0 || r == height() - 1) {
             return true;
         } else {
             return false;
         }
     }
 
-    private boolean isOutOfBoundries(int c, int r) {
-        if (r < 0 || r > this.picture.height() - 1) {
+    private boolean isOutOfBoundries(int c, int r, double[][] matrix) {
+        if (r < 0 || r > matrix.length - 1) {
             return true;
-        } else if (c < 0 || c > this.picture.width() - 1) {
+        } else if (c < 0 || c > matrix[0].length - 1) {
             return true;
         } else {
             return false;
@@ -110,10 +111,102 @@ public class SeamCarver {
         return energyMatrix;
     }
 
+    private int[] findSeam(double[][] energyMatrix) {
+        final int emHeight = energyMatrix.length;
+        final int emWidth = energyMatrix[0].length;
+
+        // the return result
+        int[] seam = new int[emHeight];
+
+        // lowest total energy so far
+        // 1st row is always 1000
+        double[][] distTo = new double[emHeight][emWidth];
+        Arrays.fill(distTo[0], 0);
+
+        // previous row's index for the result seam, for back trace in the end
+        int[][] edgeTo = new int[emHeight][emWidth];
+        Arrays.fill(edgeTo[0], -1);
+
+        // fill the current energy to be the largest
+        for (int r = 1; r < emHeight; ++r) {
+            for (int c = 0; c < emWidth; ++c) {
+                distTo[r][c] = Double.MAX_VALUE;
+            }
+        }
+
+        Queue<Point> queue = new Queue<>();
+        for (int c = 0; c < emWidth; ++c) {
+            // try start from every entry in the top row
+
+            queue.enqueue(new Point(0, c));
+
+            while (!queue.isEmpty()) {
+                Point p = queue.dequeue();
+
+                // next pixel's energy will be sum(previous PXs) + E(x, y)
+                double newEnergy = distTo[p.r][p.c] + energyMatrix[p.r][p.c];
+
+                // try to relax below 3 pixels (x-1, y+1), (x, y+1), (x+1, y+1)
+                if (!isOutOfBoundries(p.c - 1, p.r + 1, energyMatrix)) {
+                    if (newEnergy < distTo[p.r + 1][p.c - 1]) {
+                        // bottom-left pixel can be relaxed
+                        distTo[p.r + 1][p.c - 1] = newEnergy;
+                        edgeTo[p.r + 1][p.c - 1] = p.c;
+                        queue.enqueue(new Point(p.r + 1, p.c - 1));
+                    }
+                }
+
+                if (!isOutOfBoundries(p.c, p.r + 1, energyMatrix)) {
+                    if (newEnergy < distTo[p.r + 1][p.c]) {
+                        // below pixel
+                        distTo[p.r + 1][p.c] = newEnergy;
+                        edgeTo[p.r + 1][p.c] = p.c;
+                        queue.enqueue(new Point(p.r + 1, p.c));
+                    }
+                }
+
+                if (!isOutOfBoundries(p.c + 1, p.r + 1, energyMatrix)) {
+                    if (newEnergy < distTo[p.r + 1][p.c + 1]) {
+                        // bottom-right pixel
+                        distTo[p.r + 1][p.c + 1] = newEnergy;
+                        edgeTo[p.r + 1][p.c + 1] = p.c;
+                        queue.enqueue(new Point(p.r + 1, p.c + 1));
+                    }
+                }
+            }
+        }
+
+
+        // find the min in the bottom row
+        // find the path with minimum energy
+        double curMinSeamEnergy = Double.MAX_VALUE;
+        for (int c = 0; c < emWidth; ++c) {
+            curMinSeamEnergy = Math.min(curMinSeamEnergy, distTo[emHeight - 1][c]);
+        }
+
+        // get the index of min seam energy
+        int minSeamIndex = -1;
+        for (int c = 0; c < emWidth; ++c) {
+            if (distTo[emHeight - 1][c] == curMinSeamEnergy) {
+                minSeamIndex = c;
+                break;
+            }
+        }
+
+       int curRow = emHeight - 1;
+        int nextIndex = minSeamIndex;
+        seam[curRow] = minSeamIndex;
+        while (curRow > 0) {
+            seam[curRow - 1] = edgeTo[curRow][nextIndex];
+            nextIndex = edgeTo[curRow][nextIndex];
+            curRow--;
+        }
+
+        return seam;
+    }
 
     // sequence of indices for vertical seam
     public int[] findVerticalSeam() {
-        // TODO: test, step 3
         // construct a 2d energy array using energy() method
         // use PrintSeams to test code
         // top->down path with fewest energy
@@ -129,115 +222,7 @@ public class SeamCarver {
         // TODO: the calling to regenerate energy matrix can be reduced
         this.energyMatrix = getEnergyMatrix();
 
-        // the return result
-        int[] seam = new int[height()];
-
-        // lowest total energy so far
-        // 1st row is always 1000
-        double[][] distTo = new double[height()][width()];
-        Arrays.fill(distTo[0], 0);
-
-        // previous row's index for the result seam, for back trace in the end
-        int[][] edgeTo = new int[height()][width()];
-        Arrays.fill(edgeTo[0], -1);
-
-        // fill the current energe to be the largest
-        for (int r = 1; r < height(); ++r) {
-            for (int c = 0; c < width(); ++c) {
-                distTo[r][c] = Double.MAX_VALUE;
-            }
-        }
-
-        Queue<Point> queue = new Queue<>();
-        for (int c = 0; c < width(); ++c) {
-            // try start from every entry in the top row
-
-            queue.enqueue(new Point(0, c));
-
-            while (!queue.isEmpty()) {
-                Point p = queue.dequeue();
-
-                // next pixel's energy will be sum(previous PXs) + E(x, y)
-                double newEnergy = distTo[p.r][p.c] + this.energyMatrix[p.r][p.c];
-
-                // try to relax below 3 pixels (x-1, y+1), (x, y+1), (x+1, y+1)
-                if (!isOutOfBoundries(p.c - 1, p.r + 1)) {
-                    if (newEnergy < distTo[p.r + 1][p.c - 1]) {
-                        // bottom-left pixel can be relaxed
-                        distTo[p.r + 1][p.c - 1] = newEnergy;
-                        edgeTo[p.r + 1][p.c - 1] = p.c;
-                        queue.enqueue(new Point(p.r + 1, p.c - 1));
-                    }
-                }
-
-                if (!isOutOfBoundries(p.c, p.r + 1)) {
-                    if (newEnergy < distTo[p.r + 1][p.c]) {
-                        // below pixel
-                        distTo[p.r + 1][p.c] = newEnergy;
-                        edgeTo[p.r + 1][p.c] = p.c;
-                        queue.enqueue(new Point(p.r + 1, p.c));
-                    }
-                }
-
-                if (!isOutOfBoundries(p.c + 1, p.r + 1)) {
-                    if (newEnergy < distTo[p.r + 1][p.c + 1]) {
-                        // bottom-right pixel
-                        distTo[p.r + 1][p.c + 1] = newEnergy;
-                        edgeTo[p.r + 1][p.c + 1] = p.c;
-                        queue.enqueue(new Point(p.r + 1, p.c + 1));
-                    }
-                }
-            }
-
-            System.out.println("Dist To matrix:");
-            PrintUtil.printDoubleMatrix(distTo);
-
-            System.out.println(PrintUtil.SEPARATOR);
-
-            System.out.println("Edge To matrix:");
-            PrintUtil.printIntMatrix(edgeTo);
-
-            System.out.println(PrintUtil.SEPARATOR);
-        }
-
-
-        // find the min in the bottom row
-        // find the path with minimum energy
-        double curMinSeamEnergy = Double.MAX_VALUE;
-        for (int c = 0; c < width(); ++c) {
-            curMinSeamEnergy = Math.min(curMinSeamEnergy, distTo[height() - 1][c]);
-        }
-
-        // get the index of min seam energy
-        int minSeamIndex = -1;
-        for (int c = 0; c < width(); ++c) {
-            if (distTo[height() - 1][c] == curMinSeamEnergy) {
-                minSeamIndex = c;
-                break;
-            }
-        }
-
-        // trace back
-        /*
-        List<Integer> edgeToRes = new LinkedList<>();
-        int curRow = height() - 1;
-        int nextIndex = minSeamIndex;
-        edgeToRes.add(minSeamIndex);
-        while (curRow > 0) {
-            edgeToRes.add(edgeTo[curRow][nextIndex]);
-            nextIndex = edgeTo[curRow][nextIndex];
-            curRow--;
-        }
-
-         */
-        int curRow = height() - 1;
-        int nextIndex = minSeamIndex;
-        seam[curRow] = minSeamIndex;
-        while (curRow > 0) {
-            seam[curRow - 1] = edgeTo[curRow][nextIndex];
-            nextIndex = edgeTo[curRow][nextIndex];
-            curRow--;
-        }
+        int[] seam = findSeam(this.energyMatrix);
 
         return seam;
     }
@@ -245,12 +230,14 @@ public class SeamCarver {
 
     // sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
-        // TODO: step 4
         // use findVerticalSeam(), with transposed images
         // left->right path with fewest energy
-
         // transpose image
-        return null;
+        this.energyMatrix = MatrixUtils.transposeMatrix(this.energyMatrix);
+
+        int[] seam = findSeam(this.energyMatrix);
+
+        return seam;
     }
 
 
