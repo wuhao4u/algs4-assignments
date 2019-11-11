@@ -113,7 +113,7 @@ public class SeamCarver {
 
     // sequence of indices for vertical seam
     public int[] findVerticalSeam() {
-        // TODO: step 3
+        // TODO: test, step 3
         // construct a 2d energy array using energy() method
         // use PrintSeams to test code
         // top->down path with fewest energy
@@ -126,6 +126,7 @@ public class SeamCarver {
         from (x, y) to calculate where the seam is located. To test that your code works,
         use the client PrintSeams described in the testing section above.
          */
+        // TODO: the calling to regenerate energy matrix can be reduced
         this.energyMatrix = getEnergyMatrix();
 
         // the return result
@@ -160,7 +161,6 @@ public class SeamCarver {
                 double newEnergy = distTo[p.r][p.c] + this.energyMatrix[p.r][p.c];
 
                 // try to relax below 3 pixels (x-1, y+1), (x, y+1), (x+1, y+1)
-//                if (!isOutOfBoundries(p.c - 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c - 1])) {
                 if (!isOutOfBoundries(p.c - 1, p.r + 1)) {
                     if (newEnergy < distTo[p.r + 1][p.c - 1]) {
                         // bottom-left pixel can be relaxed
@@ -170,7 +170,6 @@ public class SeamCarver {
                     }
                 }
 
-//                if (!isOutOfBoundries(p.c, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c])) {
                 if (!isOutOfBoundries(p.c, p.r + 1)) {
                     if (newEnergy < distTo[p.r + 1][p.c]) {
                         // below pixel
@@ -180,7 +179,6 @@ public class SeamCarver {
                     }
                 }
 
-//                if (!isOutOfBoundries(p.c + 1, p.r + 1) && (newEnergy < distTo[p.r + 1][p.c + 1])) {
                 if (!isOutOfBoundries(p.c + 1, p.r + 1)) {
                     if (newEnergy < distTo[p.r + 1][p.c + 1]) {
                         // bottom-right pixel
@@ -252,7 +250,6 @@ public class SeamCarver {
         // left->right path with fewest energy
 
         // transpose image
-
         return null;
     }
 
