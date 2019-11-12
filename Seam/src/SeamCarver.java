@@ -1,6 +1,7 @@
 import edu.princeton.cs.algs4.Picture;
 import edu.princeton.cs.algs4.Queue;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -19,27 +20,48 @@ public class SeamCarver {
     private static final double BOUNDARY_ENERGY = 1000.0;
     private Picture picture;
     private double[][] energyMatrix;
+    // TODO: keep track of the current matrix orientation, convert only when it's needed
+    private boolean isMatrixVertical;
+    private Color[][] colorMatrix;
 
     // create a seam carver object based on the given picture
     public SeamCarver(final Picture p) {
         // making a hard copy of the original picture
         this.picture = new Picture(p);
+        this.isMatrixVertical = true;
+
+        // init color matrix
+        this.colorMatrix = new Color[p.height()][p.width()];
+        for (int r = 0; r < p.height(); ++r) {
+            for (int c = 0; c < p.width(); ++c) {
+                colorMatrix[r][c] = p.get(c, r);
+            }
+        }
+
+        // init energy matrix
+        this.energyMatrix = getEnergyMatrix();
     }
 
     // current picture
     public Picture picture() {
-        return this.picture;
+        Picture p = new Picture(width(), height());
+        for (int r = 0; r < height(); ++r) {
+            for (int c = 0; c < width(); ++c) {
+                p.set(r, c, this.colorMatrix[r][c]);
+            }
+        }
+        return p;
     }
 
 
     // width of current picture
     public int width() {
-        return this.picture.width();
+        return colorMatrix[0].length;
     }
 
     // height of current picture
     public int height() {
-        return this.picture.height();
+        return colorMatrix.length;
     }
 
 
@@ -64,14 +86,15 @@ public class SeamCarver {
     }
 
     private int deltaXSquare(int c, int r) {
-        // c is [1,width]
-        // r is [1,height]
-        if (c <= 0 || c >= this.picture.width() - 1) throw new IllegalArgumentException("Invalid c value");
-        if (r <= 0 || r >= this.picture.height() - 1) throw new IllegalArgumentException("Invalid r value");
+        if (c <= 0 || c >= width() - 1) throw new IllegalArgumentException("Invalid c value");
+        if (r <= 0 || r >= height() - 1) throw new IllegalArgumentException("Invalid r value");
 
-        int rDiff = this.picture.get(c + 1, r).getRed() - this.picture.get(c - 1, r).getRed();
-        int gDiff = this.picture.get(c + 1, r).getGreen() - this.picture.get(c - 1, r).getGreen();
-        int bDiff = this.picture.get(c + 1, r).getBlue() - this.picture.get(c - 1, r).getBlue();
+        Color rightPx = this.colorMatrix[r][c + 1];
+        Color leftPx = this.colorMatrix[r][c - 1];
+
+        int rDiff = rightPx.getRed() - leftPx.getRed();
+        int gDiff = rightPx.getGreen() - leftPx.getGreen();
+        int bDiff = rightPx.getBlue() - leftPx.getBlue();
 
         return rDiff * rDiff + gDiff * gDiff + bDiff * bDiff;
     }
@@ -80,17 +103,20 @@ public class SeamCarver {
         if (c < 0 || c > this.picture.width() - 1) throw new IllegalArgumentException("Invalid c value");
         if (r < 0 || r > this.picture.height() - 1) throw new IllegalArgumentException("Invalid r value");
 
-        int rDiff = this.picture.get(c, r + 1).getRed() - this.picture.get(c, r - 1).getRed();
-        int gDiff = this.picture.get(c, r + 1).getGreen() - this.picture.get(c, r - 1).getGreen();
-        int bDiff = this.picture.get(c, r + 1).getBlue() - this.picture.get(c, r - 1).getBlue();
+        Color upPx = this.colorMatrix[r - 1][c];
+        Color belowPx = this.colorMatrix[r + 1][c];
+
+        int rDiff = upPx.getRed() - belowPx.getRed();
+        int gDiff = upPx.getGreen() - belowPx.getGreen();
+        int bDiff = upPx.getBlue() - belowPx.getBlue();
 
         return rDiff * rDiff + gDiff * gDiff + bDiff * bDiff;
     }
 
     // energy of pixel at column x and row y
     public double energy(int c, int r) {
-        if (c < 0 || c > this.picture.width() - 1) throw new IllegalArgumentException("Invalid c value");
-        if (r < 0 || r > this.picture.height() - 1) throw new IllegalArgumentException("Invalid r value");
+        if (c < 0 || c > width() - 1) throw new IllegalArgumentException("Invalid c value");
+        if (r < 0 || r > height() - 1) throw new IllegalArgumentException("Invalid r value");
 
         if (isOnBoundary(c, r)) {
             return BOUNDARY_ENERGY;
@@ -104,7 +130,7 @@ public class SeamCarver {
 
         for (int r = 0; r < height(); ++r) {
             for (int c = 0; c < width(); ++c) {
-                energyMatrix[r][c] = this.energy(c, r);
+                energyMatrix[r][c] = energy(c, r);
             }
         }
 
@@ -176,7 +202,6 @@ public class SeamCarver {
             }
         }
 
-
         // find the min in the bottom row
         // find the path with minimum energy
         double curMinSeamEnergy = Double.MAX_VALUE;
@@ -193,7 +218,8 @@ public class SeamCarver {
             }
         }
 
-       int curRow = emHeight - 1;
+        // trace back
+        int curRow = emHeight - 1;
         int nextIndex = minSeamIndex;
         seam[curRow] = minSeamIndex;
         while (curRow > 0) {
@@ -220,7 +246,12 @@ public class SeamCarver {
         use the client PrintSeams described in the testing section above.
          */
         // TODO: the calling to regenerate energy matrix can be reduced
-        this.energyMatrix = getEnergyMatrix();
+
+        if (!this.isMatrixVertical) {
+            // energy matrix is now vertical
+            this.energyMatrix = MatrixUtils.transposeMatrix(this.energyMatrix);
+            this.isMatrixVertical = true;
+        }
 
         int[] seam = findSeam(this.energyMatrix);
 
@@ -233,13 +264,45 @@ public class SeamCarver {
         // use findVerticalSeam(), with transposed images
         // left->right path with fewest energy
         // transpose image
-        this.energyMatrix = MatrixUtils.transposeMatrix(this.energyMatrix);
+
+        if (this.isMatrixVertical) {
+            // energy matrix is not horizontal
+            this.energyMatrix = MatrixUtils.transposeMatrix(this.energyMatrix);
+            this.isMatrixVertical = false;
+        }
 
         int[] seam = findSeam(this.energyMatrix);
 
         return seam;
     }
 
+    // remove vertical seam from current picture
+    public void removeVerticalSeam(int[] seam) {
+        if (seam == null) throw new IllegalArgumentException("null seam input.");
+        if (seam.length != this.picture.height()) throw new IllegalArgumentException("seam too long/short");
+        if (this.picture.width() <= 1) {
+            throw new IllegalArgumentException("only have 0 or 1 pixel at width, cannot remove");
+        }
+        if (!validSeam(seam, this.picture.height())) throw new IllegalArgumentException("invalid seam");
+
+        // TODO: step 5
+        // TODO: re-calculate energy matrix only needed
+        // called with output of findVerticalSeam()
+        // test with ResizeDemo
+        if (!this.isMatrixVertical) {
+            this.energyMatrix = MatrixUtils.transposeMatrix(this.energyMatrix);
+            this.isMatrixVertical = true;
+        }
+
+        final int beforeHeight = height();
+        final int beforeWidth = width();
+
+        for (int r = 0; r < height(); ++r) {
+            Color[] beforeRow = this.colorMatrix[r];
+            System.arraycopy(beforeRow, 0, this.colorMatrix[r], 0, seam[r]);
+            System.arraycopy(this.colorMatrix[r], seam[r] + 1, this.colorMatrix[r], 0, seam[r]);
+        }
+    }
 
     // remove horizontal seam from current picture
     public void removeHorizontalSeam(int[] seam) {
@@ -254,19 +317,6 @@ public class SeamCarver {
         // transpose, call remove vertical seam, transpose back
     }
 
-    // remove vertical seam from current picture
-    public void removeVerticalSeam(int[] seam) {
-        if (seam == null) throw new IllegalArgumentException("null seam input.");
-        if (seam.length != this.picture.height()) throw new IllegalArgumentException("seam too long/short");
-        if (this.picture.width() <= 1) {
-            throw new IllegalArgumentException("only have 0 or 1 pixel at width, cannot remove");
-        }
-        if (!validSeam(seam, this.picture.height())) throw new IllegalArgumentException("invalid seam");
-
-        // TODO: step 5
-        // called with output of findVerticalSeam()
-        // test with ResizeDemo
-    }
 
     private boolean validSeam(int[] seam, int max) {
         for (int i = 1; i < seam.length; ++i) {
