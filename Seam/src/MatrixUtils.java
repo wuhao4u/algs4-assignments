@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Color;
 
 public class MatrixUtils {
     public static Color[][] transposeMatrix(Color[][] m0) {
@@ -56,23 +56,5 @@ public class MatrixUtils {
         }
 
         return m1;
-    }
-
-    public static void main(String[] args) {
-        int[][] m1 = new int[3][3];
-
-        int counter = 0;
-        for(int r = 0; r < m1.length; ++r) {
-            for (int c = 0; c < m1[0].length; ++c) {
-                m1[r][c] = counter++;
-            }
-        }
-
-        PrintUtil.printMatrix(m1);
-        System.out.println(PrintUtil.SEPARATOR);
-
-        m1 = transposeMatrix(m1);
-        PrintUtil.printMatrix(m1);
-
     }
 }

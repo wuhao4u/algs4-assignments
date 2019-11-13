@@ -47,5 +47,4 @@ public class ResizeDemo {
         inputImg.show();
         outputImg.show();
     }
-    
 }
