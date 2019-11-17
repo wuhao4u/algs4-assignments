@@ -239,9 +239,11 @@ public class SeamCarver {
         final int beforeWidth = width();
 
         for (int r = 0; r < height(); ++r) {
+            // TODO: optimize this part, we don't need to manually create newRow, just need to keep track of the width()
             Color[] newRow = new Color[beforeWidth - 1];
             System.arraycopy(this.colorMatrix[r], 0, newRow, 0, seam[r]);
-            System.arraycopy(this.colorMatrix[r], seam[r] + 1, newRow, seam[r], beforeWidth - seam[r] - 1); // length?
+            System.arraycopy(this.colorMatrix[r], seam[r] + 1,
+                    newRow, seam[r], beforeWidth - seam[r] - 1);
             this.colorMatrix[r] = newRow;
         }
     }
