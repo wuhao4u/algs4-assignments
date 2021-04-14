@@ -2,17 +2,14 @@ import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class BaseballElimination {
-    // edge -> network -> ff
-    Set<String> teams;
-    FlowNetwork flowNetwork;
-    FordFulkerson fordFulkerson;
-
     /*
     A team is mathematically eliminated if it cannot possibly finish the season in (or tied for) first place.
     Trivial elimination. If the maximum number of games team x can win is less than the number of wins of some other team i, then team x is trivially eliminated
@@ -24,11 +21,61 @@ public class BaseballElimination {
     Intuitively, each unit of flow in the network corresponds to a remaining game.
     As it flows through the network from s to t, it passes from a game vertex, say between teams i and j,
     then through one of the team vertices i or j, classifying this game as being won by that team.
+
+
+                w[i] l[i] r[i]          g[i][j]
+i  team         wins loss left   NY Bal Bos Tor Det
+---------------------------------------------------
+0  New York      75   59   28     -   3   8   7   3
+1  Baltimore     71   63   28     3   -   2   7   7
+2  Boston        69   66   27     8   2   -   0   3
+3  Toronto       63   72   27     7   7   0   -   3
+4  Detroit       49   86   27     3   7   3   3   -
+
+5
+New_York    75 59 28   0 3 8 7 3
+Baltimore   71 63 28   3 0 2 7 7
+Boston      69 66 27   8 2 0 0 3
+Toronto     63 72 27   7 7 0 0 3
+Detroit     49 86 27   3 7 3 3 0
+
      */
+
+    // edge -> network -> ff
+    int numOfTeams;
+    Set<String> teams;
+    FlowNetwork flowNetwork;
+    FordFulkerson fordFulkerson;
+    int[] w, l, r;
+    int[][] g;
+
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("DM_DEFAULT_ENCODING")
     public BaseballElimination(String filename) {
         // create a baseball division from given filename in format specified below
-        try (FileReader reader = new FileReader(filename)) {
-            // while (reader)
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String inValue = br.readLine();
+            this.numOfTeams = Integer.parseInt(inValue);
+
+            // New_York    75 59 28   0 3 8 7 3
+            int numOfLines = this.numOfTeams+1;
+            for (int i = 1; i < numOfLines; ++i) {
+                inValue = br.readLine();
+                String[] line = inValue.trim().split("\\s\\s+");
+                System.out.println(line[0]);
+                System.out.println(line[1]);
+                System.out.println(line[2]);
+                System.out.println("-----------------------------------");
+            }
+
+            /*
+            while ((inValue = br.readLine()) != null) {
+                String[] line = inValue.trim().split("\\s\\s+");
+                System.out.println(line[0]);
+                System.out.println(line[1]);
+                System.out.println(line[2]);
+                System.out.println("-----------------------------------");
+            }
+             */
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -40,13 +87,13 @@ public class BaseballElimination {
 
     public int numberOfTeams() {
         // number of teams
-        return -1;
+        return this.numOfTeams;
     }
 
     public Iterable<String> teams() {
         // all teams
 
-        return null;
+        return new ArrayList<>();
     }
 
     public int wins(String team) {
