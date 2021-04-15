@@ -3,11 +3,9 @@ import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.HashMap;
 
 public class BaseballElimination {
     /*
@@ -43,7 +41,7 @@ Detroit     49 86 27   3 7 3 3 0
 
     // edge -> network -> ff
     int numOfTeams;
-    Set<String> teams;
+    HashMap<String, Integer> teams;
     FlowNetwork flowNetwork;
     FordFulkerson fordFulkerson;
     int[] w, l, r;
@@ -55,6 +53,12 @@ Detroit     49 86 27   3 7 3 3 0
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String inValue = br.readLine();
             this.numOfTeams = Integer.parseInt(inValue);
+            teams = new HashMap<>(this.numOfTeams);
+
+            w = new int[numOfTeams];
+            l = new int[numOfTeams];
+            r = new int[numOfTeams];
+            g = new int[numOfTeams][numOfTeams];
 
             // New_York    75 59 28   0 3 8 7 3
             int numOfLines = this.numOfTeams+1;
@@ -62,23 +66,22 @@ Detroit     49 86 27   3 7 3 3 0
                 inValue = br.readLine();
                 String[] line = inValue.trim().split("\\s\\s+");
                 System.out.println(line[0]);
-                System.out.println(line[1]);
-                System.out.println(line[2]);
-                System.out.println("-----------------------------------");
-            }
+                // teams.add(line[0]);
+                teams.put(line[0], i-1);
 
-            /*
-            while ((inValue = br.readLine()) != null) {
-                String[] line = inValue.trim().split("\\s\\s+");
-                System.out.println(line[0]);
                 System.out.println(line[1]);
+                String[] wlr = line[1].split("\\s");
+                w[i-1] = Integer.parseInt(wlr[0]);
+                l[i-1] = Integer.parseInt(wlr[1]);
+                r[i-1] = Integer.parseInt(wlr[2]);
+
                 System.out.println(line[2]);
+                String[] gMatrix = line[2].split("\\s");
+                for (int j = 0; j < this.numOfTeams; ++j) {
+                    g[i-1][j] = Integer.parseInt(gMatrix[j]);
+                }
                 System.out.println("-----------------------------------");
             }
-             */
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -92,32 +95,30 @@ Detroit     49 86 27   3 7 3 3 0
 
     public Iterable<String> teams() {
         // all teams
-
-        return new ArrayList<>();
+        return this.teams.keySet();
     }
 
     public int wins(String team) {
         // number of wins for given team
-
-        return -1;
+        return this.w[this.teams.get(team)];
     }
 
     public int losses(String team) {
         // number of losses for given team
-
-        return -1;
+        return this.l[this.teams.get(team)];
     }
 
     public int remaining(String team) {
         // number of remaining games for given team
-
-        return -1;
+        return this.r[this.teams.get(team)];
     }
 
     public int against(String team1, String team2) {
         // number of remaining games between team1 and team2
+        int t1Index = this.teams.get(team1);
+        int t2Index = this.teams.get(team2);
 
-        return -1;
+        return g[t1Index][t2Index];
     }
 
     public boolean isEliminated(String team) {
