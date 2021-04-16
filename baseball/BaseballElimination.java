@@ -1,10 +1,12 @@
 import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.StdOut;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class BaseballElimination {
@@ -42,12 +44,12 @@ Detroit     49 86 27   3 7 3 3 0
     // edge -> network -> ff
     int numOfTeams;
     HashMap<String, Integer> teams;
-    FlowNetwork flowNetwork;
-    FordFulkerson fordFulkerson;
+    // FlowNetwork flowNetwork;
+    // FordFulkerson fordFulkerson;
     int[] w, l, r;
     int[][] g;
 
-    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("DM_DEFAULT_ENCODING")
+    @SuppressFBWarnings("DM_DEFAULT_ENCODING")
     public BaseballElimination(String filename) {
         // create a baseball division from given filename in format specified below
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
@@ -60,28 +62,26 @@ Detroit     49 86 27   3 7 3 3 0
             r = new int[numOfTeams];
             g = new int[numOfTeams][numOfTeams];
 
+            // TODO: build up the network, then FF
+
             // New_York    75 59 28   0 3 8 7 3
             int numOfLines = this.numOfTeams+1;
             for (int i = 1; i < numOfLines; ++i) {
                 inValue = br.readLine();
-                String[] line = inValue.trim().split("\\s\\s+");
-                System.out.println(line[0]);
-                // teams.add(line[0]);
+                String[] line = inValue.trim().split("\\s+");
                 teams.put(line[0], i-1);
 
-                System.out.println(line[1]);
-                String[] wlr = line[1].split("\\s");
-                w[i-1] = Integer.parseInt(wlr[0]);
-                l[i-1] = Integer.parseInt(wlr[1]);
-                r[i-1] = Integer.parseInt(wlr[2]);
+                w[i-1] = Integer.parseInt(line[1]);
+                l[i-1] = Integer.parseInt(line[2]);
+                r[i-1] = Integer.parseInt(line[3]);
 
-                System.out.println(line[2]);
-                String[] gMatrix = line[2].split("\\s");
                 for (int j = 0; j < this.numOfTeams; ++j) {
-                    g[i-1][j] = Integer.parseInt(gMatrix[j]);
+                    g[i-1][j] = Integer.parseInt(line[j+4]);
                 }
                 System.out.println("-----------------------------------");
             }
+
+            int x = 0;
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -123,6 +123,34 @@ Detroit     49 86 27   3 7 3 3 0
 
     public boolean isEliminated(String team) {
         // is given team eliminated?
+        return this.isTrivialEliminated(team) || this.isNonTrivialEliminated(team);
+    }
+
+    private boolean isTrivialEliminated(String team) {
+        // If the maximum number of games team x can win is less than the number of wins of some other team i,
+        // then team x is trivially eliminated. That is, if w[x] + r[x] < w[i], then team x is mathematically eliminated.
+        int teamIndex = this.teams.get(team);
+        int mostWinPossible = this.w[teamIndex] + this.r[teamIndex];
+
+        for (int i = 0; i < this.numOfTeams; ++i) {
+            if (i == teamIndex) continue;
+
+            if (mostWinPossible < this.w[i])
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isNonTrivialEliminated(String team) {
+        int totalV = (Arrays.stream(this.r).sum() / 2 - this.r[this.teams.get(team)]) + this.numOfTeams - 1 + 2;
+        FlowNetwork flowNetwork = new FlowNetwork(totalV);
+        FordFulkerson fordFulkerson;
+
+        // s 0, t totalV-1,
+        // team0,
+        for (int v = 0; v < totalV; ++v) {
+
+        }
 
         return false;
     }
