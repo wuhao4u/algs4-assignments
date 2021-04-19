@@ -1,165 +1,227 @@
+import edu.princeton.cs.algs4.FlowEdge;
 import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.FordFulkerson;
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BaseballElimination {
-    /*
-    A team is mathematically eliminated if it cannot possibly finish the season in (or tied for) first place.
-    Trivial elimination. If the maximum number of games team x can win is less than the number of wins of some other team i, then team x is trivially eliminated
-
-    Nontrivial elimination. Otherwise, we create a flow network and solve a maxflow problem in it.
-    In the network, feasible integral flows correspond to outcomes of the remaining schedule.
-    There are vertices corresponding to teams (other than team x) and
-    to remaining divisional games (not involving team x).
-    Intuitively, each unit of flow in the network corresponds to a remaining game.
-    As it flows through the network from s to t, it passes from a game vertex, say between teams i and j,
-    then through one of the team vertices i or j, classifying this game as being won by that team.
-
-
-                w[i] l[i] r[i]          g[i][j]
-i  team         wins loss left   NY Bal Bos Tor Det
----------------------------------------------------
-0  New York      75   59   28     -   3   8   7   3
-1  Baltimore     71   63   28     3   -   2   7   7
-2  Boston        69   66   27     8   2   -   0   3
-3  Toronto       63   72   27     7   7   0   -   3
-4  Detroit       49   86   27     3   7   3   3   -
-
-5
-New_York    75 59 28   0 3 8 7 3
-Baltimore   71 63 28   3 0 2 7 7
-Boston      69 66 27   8 2 0 0 3
-Toronto     63 72 27   7 7 0 0 3
-Detroit     49 86 27   3 7 3 3 0
-
-     */
-
     // edge -> network -> ff
-    int numOfTeams;
-    HashMap<String, Integer> teams;
-    // FlowNetwork flowNetwork;
-    // FordFulkerson fordFulkerson;
+    int T;
+    HashMap<String, Integer> teamToIndex;
+    HashMap<Integer, String> indexToTeam;
     int[] w, l, r;
     int[][] g;
+    HashMap<String, Set<String>> certOfElimination;
+    boolean[] isEliminated;
+    // int[] unrelatedMatchCount; // for building the FF
 
-    @SuppressFBWarnings("DM_DEFAULT_ENCODING")
     public BaseballElimination(String filename) {
-        // create a baseball division from given filename in format specified below
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String inValue = br.readLine();
-            this.numOfTeams = Integer.parseInt(inValue);
-            teams = new HashMap<>(this.numOfTeams);
+        // step 1: Write code to read in the input file and store the data.
+        In in = new In(filename);
+        this.T = in.readInt();
 
-            w = new int[numOfTeams];
-            l = new int[numOfTeams];
-            r = new int[numOfTeams];
-            g = new int[numOfTeams][numOfTeams];
+        this.teamToIndex = new HashMap<>(T);
+        this.indexToTeam = new HashMap<>(T);
+        this.w = new int[T];
+        this.l = new int[T];
+        this.r = new int[T];
+        this.g = new int[T][T];
+        this.certOfElimination = new HashMap<>(T);
+        this.isEliminated = new boolean[T];
+        // this.unrelatedMatchCount = new int[T];
 
-            // TODO: build up the network, then FF
+        for (int i = 0; i < T; ++i) {
+            // team name
+            String teamName = in.readString();
+            this.teamToIndex.put(teamName, i);
+            this.indexToTeam.put(i, teamName);
+            w[i] = in.readInt();
+            l[i] = in.readInt();
+            r[i] = in.readInt();
 
-            // New_York    75 59 28   0 3 8 7 3
-            int numOfLines = this.numOfTeams+1;
-            for (int i = 1; i < numOfLines; ++i) {
-                inValue = br.readLine();
-                String[] line = inValue.trim().split("\\s+");
-                teams.put(line[0], i-1);
+            for (int j = 0; j < T; ++j) {
+                g[i][j] = in.readInt();
 
-                w[i-1] = Integer.parseInt(line[1]);
-                l[i-1] = Integer.parseInt(line[2]);
-                r[i-1] = Integer.parseInt(line[3]);
-
-                for (int j = 0; j < this.numOfTeams; ++j) {
-                    g[i-1][j] = Integer.parseInt(line[j+4]);
+                if (i != j) {
+                    // there is a match, number of V increase
+                    // this.unrelatedMatchCount[i]++;
                 }
-                System.out.println("-----------------------------------");
             }
+        }
 
-            int x = 0;
+        for (int t = 0; t < this.T; ++t) {
+            this.preprocessing(t, this.indexToTeam.get(t));
         }
-        catch (IOException e) {
-            e.printStackTrace();
+    }
+
+    private void preprocessing(int teamIndex, String team) {
+        // TODO: here
+        Set<String> eliminated = this.isTrivialEliminated(teamIndex, team);
+        Set<String> nonTrivialEliminated = this.isNonTrivialEliminated(teamIndex, team);
+
+        eliminated.addAll(nonTrivialEliminated);
+
+        if (eliminated.isEmpty()) {
+            this.isEliminated[teamIndex] = false;
+        } else {
+            this.isEliminated[teamIndex] = true;
+            this.certOfElimination.put(team, eliminated);
         }
+    }
+
+    private Set<String> isTrivialEliminated(int teamIndex, String team) {
+        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+
+        Set<String> trivialEliminater = new HashSet<>();
+
+        // If the maximum number of games team x can win is less than the number of wins of some other team i,
+        // then team x is trivially eliminated. That is, if w[x] + r[x] < w[i], then team x is mathematically eliminated.
+        int mostWinPossible = this.w[teamIndex] + this.r[teamIndex];
+
+        for (int i = 0; i < this.T; ++i) {
+            if (i == teamIndex) continue;
+
+            if (mostWinPossible < this.w[i]) {
+                trivialEliminater.add(this.indexToTeam.get(i));
+            }
+        }
+        return trivialEliminater;
+    }
+
+    private Set<String> isNonTrivialEliminated(int teamIndex, String team) {
+        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+
+        Set<String> eliminator = new HashSet<>();
+
+        // int totalV =  this.unrelatedMatchCount[teamIndex] + (this.T - 1) + 2;
+        int totalV =  T * (T - 1) / 2 + (this.T - 1) + 2;
+        FlowNetwork flowNetwork = new FlowNetwork(totalV);
+        FordFulkerson fordFulkerson;
+
+        // v0 is s, totalV-1 is t
+        int vPtr = 1;
+
+        // teamIndex in g, vertex index in flowNetwork
+        HashMap<Integer, Integer> teamVertexMap = new HashMap<>(this.T - 1);
+        for (int i = 0; i < this.T; ++i) {
+            if (i == teamIndex) continue;
+            teamVertexMap.put(i, vPtr);
+
+            int toTCap = w[teamIndex] + r[teamIndex] - w[i];
+            // TODO: connect team vertices to t: w4 + r4 - w2
+            // new FlowEdge(int v, int w, double capacity);
+            FlowEdge teamVToT = new FlowEdge(i, totalV - 1, toTCap);
+            flowNetwork.addEdge(teamVToT);
+
+            ++vPtr;
+        }
+
+        int x = 0;
+
+        for (int r = 0; r < this.T; ++r) {
+            if (r == teamIndex) continue;
+            for (int c = 0; c < this.T; ++c) {
+                if (c == teamIndex || r == c) continue;
+
+                FlowEdge sToMatchV = new FlowEdge(0, vPtr, this.g[r][c]);
+                flowNetwork.addEdge(sToMatchV);
+
+                FlowEdge matchVToTeamV1 = new FlowEdge(vPtr, teamVertexMap.get(r), Double.POSITIVE_INFINITY);
+                FlowEdge matchVToTeamV2 = new FlowEdge(vPtr, teamVertexMap.get(c), Double.POSITIVE_INFINITY);
+                flowNetwork.addEdge(matchVToTeamV1);
+                flowNetwork.addEdge(matchVToTeamV2);
+
+                ++vPtr;
+            }
+        }
+
+        System.out.println(flowNetwork.toString());
+
+        fordFulkerson = new FordFulkerson(flowNetwork, 0, totalV - 1);
+
+        int maxFlowTargetVal = (this.T - 1) * (w[teamIndex] + r[teamIndex]) - (Arrays.stream(this.w).sum() - w[teamIndex]);
+
+        if (maxFlowTargetVal == fordFulkerson.value()) {
+            // maxflow, team is not out
+            System.out.println("Team: " + team + " is not eliminated.");
+        }
+
+        for (int i = 1; i < this.T + 1; ++i) {
+            if (fordFulkerson.inCut(teamVertexMap.get(i))) {
+                eliminator.add(this.indexToTeam.get(i));
+            }
+        }
+
+        return eliminator;
     }
 
     public int numberOfTeams() {
         // number of teams
-        return this.numOfTeams;
+        return this.T;
     }
 
     public Iterable<String> teams() {
         // all teams
-        return this.teams.keySet();
+        return this.teamToIndex.keySet();
     }
 
     public int wins(String team) {
+        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+
         // number of wins for given team
-        return this.w[this.teams.get(team)];
+        return this.w[this.teamToIndex.get(team)];
     }
 
     public int losses(String team) {
+        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+
         // number of losses for given team
-        return this.l[this.teams.get(team)];
+        return this.l[this.teamToIndex.get(team)];
     }
 
     public int remaining(String team) {
+        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+
         // number of remaining games for given team
-        return this.r[this.teams.get(team)];
+        return this.r[this.teamToIndex.get(team)];
     }
 
     public int against(String team1, String team2) {
+        if (team1 == null || team1.isEmpty()
+                || team2 == null || team2.isEmpty())  throw new IllegalArgumentException();
+
         // number of remaining games between team1 and team2
-        int t1Index = this.teams.get(team1);
-        int t2Index = this.teams.get(team2);
+        int t1Index = this.teamToIndex.get(team1);
+        int t2Index = this.teamToIndex.get(team2);
 
         return g[t1Index][t2Index];
     }
 
     public boolean isEliminated(String team) {
+        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+
         // is given team eliminated?
-        return this.isTrivialEliminated(team) || this.isNonTrivialEliminated(team);
-    }
-
-    private boolean isTrivialEliminated(String team) {
-        // If the maximum number of games team x can win is less than the number of wins of some other team i,
-        // then team x is trivially eliminated. That is, if w[x] + r[x] < w[i], then team x is mathematically eliminated.
-        int teamIndex = this.teams.get(team);
-        int mostWinPossible = this.w[teamIndex] + this.r[teamIndex];
-
-        for (int i = 0; i < this.numOfTeams; ++i) {
-            if (i == teamIndex) continue;
-
-            if (mostWinPossible < this.w[i])
-                return true;
-        }
-        return false;
-    }
-
-    private boolean isNonTrivialEliminated(String team) {
-        int totalV = (Arrays.stream(this.r).sum() / 2 - this.r[this.teams.get(team)]) + this.numOfTeams - 1 + 2;
-        FlowNetwork flowNetwork = new FlowNetwork(totalV);
-        FordFulkerson fordFulkerson;
-
-        // s 0, t totalV-1,
-        // team0,
-        for (int v = 0; v < totalV; ++v) {
-
-        }
-
-        return false;
+        return this.isEliminated[this.teamToIndex.get(team)];
     }
 
     public Iterable<String> certificateOfElimination(String team) {
+        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
         // subset R of teams that eliminates given team; null if not eliminated
 
-        return null;
+        if (this.isEliminated(team)) {
+            return this.certOfElimination.get(team);
+        } else {
+            return Collections.emptySet();
+        }
     }
+
+
 
     public static void main(String[] args) {
         BaseballElimination division = new BaseballElimination(args[0]);
