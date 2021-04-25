@@ -19,7 +19,6 @@ public class BaseballElimination {
     int[][] g;
     HashMap<String, Set<String>> certOfElimination;
     boolean[] isEliminated;
-    // int[] unrelatedMatchCount; // for building the FF
 
     public BaseballElimination(String filename) {
         // step 1: Write code to read in the input file and store the data.
@@ -34,7 +33,6 @@ public class BaseballElimination {
         this.g = new int[T][T];
         this.certOfElimination = new HashMap<>(T);
         this.isEliminated = new boolean[T];
-        // this.unrelatedMatchCount = new int[T];
 
         for (int i = 0; i < T; ++i) {
             // team name
@@ -99,8 +97,14 @@ public class BaseballElimination {
 
         Set<String> eliminator = new HashSet<>();
 
-        // int totalV =  this.unrelatedMatchCount[teamIndex] + (this.T - 1) + 2;
-        int totalV =  T * (T - 1) / 2 + (this.T - 1) + 2;
+        // number of vertices in FF graph, for the current team, team X to test on
+        // int totalV =  T * (T - 1) / 2 + (this.T - 1) + 2 + 1;
+        int totalV = T * T; // total matrix cell
+        totalV -= T; // team cannot against self
+        totalV /= 2; // a vs. b is the same as b vs. a
+        totalV = totalV - T + 1; // minus team against the current team
+        totalV = totalV + (T - 1) + 2;
+
         FlowNetwork flowNetwork = new FlowNetwork(totalV);
         FordFulkerson fordFulkerson;
 
@@ -109,25 +113,26 @@ public class BaseballElimination {
 
         // teamIndex in g, vertex index in flowNetwork
         HashMap<Integer, Integer> teamVertexMap = new HashMap<>(this.T - 1);
-        for (int i = 0; i < this.T; ++i) {
-            if (i == teamIndex) continue;
-            teamVertexMap.put(i, vPtr);
+        for (int t = 0; t < this.T; ++t) {
+            if (t == teamIndex) continue;
+            teamVertexMap.put(t, vPtr);
 
-            int toTCap = w[teamIndex] + r[teamIndex] - w[i];
-            // TODO: connect team vertices to t: w4 + r4 - w2
+            int toTCap = w[teamIndex] + r[teamIndex] - w[t];
+            // connecting team vertices to t: w4 + r4 - w2
             // new FlowEdge(int v, int w, double capacity);
-            FlowEdge teamVToT = new FlowEdge(i, totalV - 1, toTCap);
+            FlowEdge teamVToT = new FlowEdge(vPtr, totalV - 1, toTCap);
             flowNetwork.addEdge(teamVToT);
 
             ++vPtr;
         }
 
-        int x = 0;
-
+        // connecting S to game vertices
+        // TODO: making sure game 0-1 is the same as game 1-0, by only do the left half of the matrix?
         for (int r = 0; r < this.T; ++r) {
             if (r == teamIndex) continue;
-            for (int c = 0; c < this.T; ++c) {
-                if (c == teamIndex || r == c) continue;
+
+            for (int c = 0; c < r; ++c) {
+                if (c == teamIndex) continue;
 
                 FlowEdge sToMatchV = new FlowEdge(0, vPtr, this.g[r][c]);
                 flowNetwork.addEdge(sToMatchV);
@@ -152,9 +157,13 @@ public class BaseballElimination {
             System.out.println("Team: " + team + " is not eliminated.");
         }
 
-        for (int i = 1; i < this.T + 1; ++i) {
-            if (fordFulkerson.inCut(teamVertexMap.get(i))) {
-                eliminator.add(this.indexToTeam.get(i));
+        // teamVertexMap: t, vPtr
+        for (int t = 0; t < this.T; ++t) {
+            if (t == teamIndex) continue;
+
+            System.out.println("Team: " + t);
+            if (fordFulkerson.inCut(teamVertexMap.get(t))) {
+                eliminator.add(this.indexToTeam.get(t));
             }
         }
 
