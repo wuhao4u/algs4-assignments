@@ -4,21 +4,19 @@ import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class BaseballElimination {
     // edge -> network -> ff
-    int T;
-    HashMap<String, Integer> teamToIndex;
-    HashMap<Integer, String> indexToTeam;
-    int[] w, l, r;
-    int[][] g;
-    HashMap<String, Set<String>> certOfElimination;
-    boolean[] isEliminated;
+    final private int T;
+    final private HashMap<String, Integer> teamToIndex;
+    final private HashMap<Integer, String> indexToTeam;
+    final private int[] w, l, r;
+    final private int[][] g;
+    final private HashMap<String, Set<String>> certOfElimination;
+    private boolean[] isEliminated;
 
     public BaseballElimination(String filename) {
         // step 1: Write code to read in the input file and store the data.
@@ -45,11 +43,6 @@ public class BaseballElimination {
 
             for (int j = 0; j < T; ++j) {
                 g[i][j] = in.readInt();
-
-                if (i != j) {
-                    // there is a match, number of V increase
-                    // this.unrelatedMatchCount[i]++;
-                }
             }
         }
 
@@ -59,9 +52,8 @@ public class BaseballElimination {
     }
 
     private void preprocessing(int teamIndex, String team) {
-        // TODO: here
-        Set<String> eliminated = this.isTrivialEliminated(teamIndex, team);
-        Set<String> nonTrivialEliminated = this.isNonTrivialEliminated(teamIndex, team);
+        Set<String> eliminated = this.getTrivialEliminator(teamIndex, team);
+        Set<String> nonTrivialEliminated = this.getNonTrivialEliminator(teamIndex, team);
 
         eliminated.addAll(nonTrivialEliminated);
 
@@ -73,7 +65,7 @@ public class BaseballElimination {
         }
     }
 
-    private Set<String> isTrivialEliminated(int teamIndex, String team) {
+    private Set<String> getTrivialEliminator(int teamIndex, String team) {
         if (team == null || team.isEmpty())  throw new IllegalArgumentException();
 
         Set<String> trivialEliminater = new HashSet<>();
@@ -92,7 +84,7 @@ public class BaseballElimination {
         return trivialEliminater;
     }
 
-    private Set<String> isNonTrivialEliminated(int teamIndex, String team) {
+    private Set<String> getNonTrivialEliminator(int teamIndex, String team) {
         if (team == null || team.isEmpty())  throw new IllegalArgumentException();
 
         Set<String> eliminator = new HashSet<>();
@@ -130,18 +122,19 @@ public class BaseballElimination {
         }
 
         // connecting S to game vertices
-        // TODO: making sure game 0-1 is the same as game 1-0, by only do the left half of the matrix?
-        for (int r = 0; r < this.T; ++r) {
-            if (r == teamIndex) continue;
+        for (int row = 0; row < this.T; ++row) {
+            if (row == teamIndex) continue;
 
-            for (int c = 0; c < r; ++c) {
-                if (c == teamIndex) continue;
+            // only scan the left side of the game matrix,
+            // avoiding duplicated game vertices being added
+            for (int col = 0; col < row; ++col) {
+                if (col == teamIndex) continue;
 
-                FlowEdge sToMatchV = new FlowEdge(0, vPtr, this.g[r][c]);
+                FlowEdge sToMatchV = new FlowEdge(0, vPtr, this.g[row][col]);
                 flowNetwork.addEdge(sToMatchV);
 
-                FlowEdge matchVToTeamV1 = new FlowEdge(vPtr, teamVertexMap.get(r), Double.POSITIVE_INFINITY);
-                FlowEdge matchVToTeamV2 = new FlowEdge(vPtr, teamVertexMap.get(c), Double.POSITIVE_INFINITY);
+                FlowEdge matchVToTeamV1 = new FlowEdge(vPtr, teamVertexMap.get(row), Double.POSITIVE_INFINITY);
+                FlowEdge matchVToTeamV2 = new FlowEdge(vPtr, teamVertexMap.get(col), Double.POSITIVE_INFINITY);
                 flowNetwork.addEdge(matchVToTeamV1);
                 flowNetwork.addEdge(matchVToTeamV2);
 
@@ -149,16 +142,16 @@ public class BaseballElimination {
             }
         }
 
-        System.out.println(flowNetwork.toString());
+        // System.out.println(flowNetwork.toString());
 
         fordFulkerson = new FordFulkerson(flowNetwork, 0, totalV - 1);
 
-        int maxFlowTargetVal = (this.T - 1) * (w[teamIndex] + r[teamIndex]) - (Arrays.stream(this.w).sum() - w[teamIndex]);
+        // int maxFlowTargetVal = (this.T - 1) * (w[teamIndex] + r[teamIndex]) - (Arrays.stream(this.w).sum() - w[teamIndex]);
 
-        if (maxFlowTargetVal == fordFulkerson.value()) {
-            // maxflow, team is not out
-            System.out.println("Team: " + team + " is not eliminated.");
-        }
+        // if (maxFlowTargetVal == fordFulkerson.value()) {
+        //     // maxflow, team is not out
+        //     System.out.println("Team: " + team + " is not eliminated.");
+        // }
 
         // teamVertexMap: t, vPtr
         for (int t = 0; t < this.T; ++t) {
@@ -182,30 +175,39 @@ public class BaseballElimination {
         return this.teamToIndex.keySet();
     }
 
+    private void teamInputCheck(String team) {
+        if (team == null || team.isEmpty())
+            throw new IllegalArgumentException();
+
+        if (!this.teamToIndex.containsKey(team))
+            throw new IllegalArgumentException();
+    }
+
     public int wins(String team) {
-        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+        teamInputCheck(team);
 
         // number of wins for given team
         return this.w[this.teamToIndex.get(team)];
     }
 
     public int losses(String team) {
-        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+        teamInputCheck(team);
 
         // number of losses for given team
         return this.l[this.teamToIndex.get(team)];
     }
 
     public int remaining(String team) {
-        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+        teamInputCheck(team);
 
         // number of remaining games for given team
         return this.r[this.teamToIndex.get(team)];
     }
 
     public int against(String team1, String team2) {
-        if (team1 == null || team1.isEmpty()
-                || team2 == null || team2.isEmpty())  throw new IllegalArgumentException();
+        teamInputCheck(team1);
+        teamInputCheck(team2);
+        if (team1.equals(team2)) throw new IllegalArgumentException();
 
         // number of remaining games between team1 and team2
         int t1Index = this.teamToIndex.get(team1);
@@ -215,20 +217,20 @@ public class BaseballElimination {
     }
 
     public boolean isEliminated(String team) {
-        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+        teamInputCheck(team);
 
         // is given team eliminated?
         return this.isEliminated[this.teamToIndex.get(team)];
     }
 
     public Iterable<String> certificateOfElimination(String team) {
-        if (team == null || team.isEmpty())  throw new IllegalArgumentException();
+        teamInputCheck(team);
         // subset R of teams that eliminates given team; null if not eliminated
 
         if (this.isEliminated(team)) {
             return this.certOfElimination.get(team);
         } else {
-            return Collections.emptySet();
+            return null;
         }
     }
 
