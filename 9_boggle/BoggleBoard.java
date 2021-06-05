@@ -71,7 +71,10 @@ public class BoggleBoard {
         board = new char[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
+                // n * i + j, each die can only be used once, get the right die
                 String letters = BOGGLE_1992[n*i+j];
+
+                // which facet of the dice is facing up?
                 int r = StdRandom.uniform(letters.length());
                 board[i][j] = letters.charAt(r);
             }
@@ -84,13 +87,17 @@ public class BoggleBoard {
      */
     public BoggleBoard(String filename) {
         In in = new In(filename);
+        // m, number of rows / height
+        // n, number of columns / width
         m = in.readInt();
         n = in.readInt();
         if (m <= 0) throw new IllegalArgumentException("number of rows must be a positive integer");
         if (n <= 0) throw new IllegalArgumentException("number of columns must be a positive integer");
         board = new char[m][n];
         for (int i = 0; i < m; i++) {
+            // i is current row
             for (int j = 0; j < n; j++) {
+                // j is current column
                 String letter = in.readString().toUpperCase();
                 if (letter.equals("QU"))
                     board[i][j] = 'Q';
