@@ -1,4 +1,14 @@
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /* *****************************************************************************
  *  Name:
@@ -6,16 +16,59 @@ import static org.junit.jupiter.api.Assertions.*;
  *  Description:
  **************************************************************************** */
 class BoggleSolverTest {
+    private BoggleBoard boardPts0, boardPts1;
+    private BoggleSolver boggleSolver;
 
-    @org.junit.jupiter.api.Test
+    @BeforeEach
+    void setUp() {
+        this.boardPts0 = new BoggleBoard("board-points0.txt");
+        this.boardPts1 = new BoggleBoard("board-points1.txt");
+        this.boggleSolver = new BoggleSolver(this.makeDictionary("dictionary-common.txt"));
+    }
+
+    String[] makeDictionary(String pathToFile) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(pathToFile));
+            String[] results = new String[lines.size()];
+
+            for (int i = 0; i < lines.size(); ++i) {
+                results[i] = lines.get(i);
+            }
+
+            return results;
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+            return new String[0];
+        }
+        // try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(pathToFile))) {
+        /*
+        try (Path path = Paths.get(pathToFile))) {
+            List<String> lines = Files.readAllLines(path);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+            return new String[0];
+        }
+
+         */
+    }
+
+    @AfterEach
+    void tearDown() {
+    }
+
+    @Test
     void getAllValidWords() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getAllCombinations() {
+        Set<String> c0 = this.boggleSolver.getAllCombinations(this.boardPts0);
+        assertNotEquals(0, c0.size());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void scoreOf() {
     }
 }

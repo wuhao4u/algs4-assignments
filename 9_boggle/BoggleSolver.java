@@ -25,7 +25,7 @@ public class BoggleSolver {
     public Iterable<String> getAllValidWords(BoggleBoard board) {
         Set<String> combinations = this.getAllCombinations(board);
 
-        return Collections.emptySet();
+        return combinations;
     }
 
     public Set<String> getAllCombinations(BoggleBoard board) {
@@ -34,6 +34,7 @@ public class BoggleSolver {
         // DFS to get all combinations
         for (int r = 0; r < board.rows(); ++r) {
             for (int c = 0; c < board.cols(); ++c) {
+                // TODO: need to pass in a visited 2D array to avoid double visiting
                 this.combination(board, r, c, new StringBuilder(), combinations);
             }
         }
@@ -52,7 +53,10 @@ public class BoggleSolver {
         char curChar = board.getLetter(curRow, curCol);
         // append char in-place
         soFar.append(curChar);
-        results.add(soFar.toString());
+
+        if (soFar.length() > 1) {
+            results.add(soFar.toString());
+        }
 
         // left, curCol - 1
         this.combination(board, curRow, curCol - 1, soFar, results);
