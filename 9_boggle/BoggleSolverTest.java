@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /* *****************************************************************************
  *  Name:
@@ -18,20 +20,26 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class BoggleSolverTest {
     private BoggleBoard boardPts0, boardPts1;
     private BoggleSolver boggleSolver;
+    private HashSet<String> dictCommon;
 
     @BeforeEach
     void setUp() {
         this.boardPts0 = new BoggleBoard("board-points0.txt");
         this.boardPts1 = new BoggleBoard("board-points1.txt");
-        this.boggleSolver = new BoggleSolver(this.makeDictionary("dictionary-common.txt"));
+
+        this.dictCommon = new HashSet<>();
+
+        String[] dictCommonStrs = this.makeDictionary("dictionary-common.txt", this.dictCommon);
+        this.boggleSolver = new BoggleSolver(dictCommonStrs);
     }
 
-    String[] makeDictionary(String pathToFile) {
+    String[] makeDictionary(String pathToFile, Set<String> dict) {
         try {
             List<String> lines = Files.readAllLines(Paths.get(pathToFile));
             String[] results = new String[lines.size()];
 
             for (int i = 0; i < lines.size(); ++i) {
+                dict.add(lines.get(i));
                 results[i] = lines.get(i);
             }
 
@@ -60,6 +68,10 @@ class BoggleSolverTest {
 
     @Test
     void getAllValidWords() {
+        Iterable<String> vw0 = this.boggleSolver.getAllValidWords(this.boardPts0);
+        for (String vw : vw0) {
+            assertTrue(this.dictCommon.contains(vw));
+        }
     }
 
     @Test

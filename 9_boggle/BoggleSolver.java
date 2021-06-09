@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 public class BoggleSolver {
     private TreeSet<String> dict;
-    private TreeSet<String> validWords;
+    // private TreeSet<String> validWords;
     // private TreeMap<String, Integer> dict;
 
     // Initializes the data structure using the given array of strings as the dictionary.
@@ -23,9 +23,17 @@ public class BoggleSolver {
 
     // Returns the set of all valid words in the given Boggle board, as an Iterable.
     public Iterable<String> getAllValidWords(BoggleBoard board) {
+        TreeSet<String> validWords = new TreeSet<>();
         Set<String> combinations = this.getAllCombinations(board);
 
-        return combinations;
+        // TODO: filter combination with words in the dictionary
+        for (String combination : combinations) {
+            if (this.dict.contains(combination)) {
+                validWords.add(combination);
+            }
+        }
+
+        return validWords;
     }
 
     public Set<String> getAllCombinations(BoggleBoard board) {
@@ -40,8 +48,6 @@ public class BoggleSolver {
                 this.combination(board, r, c, new StringBuilder(), visited, combinations);
             }
         }
-
-        // TODO: filter combination with words in the dictionary
 
         return combinations;
     }
