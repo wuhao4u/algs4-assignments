@@ -30,12 +30,14 @@ public class BoggleSolver {
 
     public Set<String> getAllCombinations(BoggleBoard board) {
         Set<String> combinations = new HashSet<>();
+        boolean[][] visited;
 
         // DFS to get all combinations
         for (int r = 0; r < board.rows(); ++r) {
             for (int c = 0; c < board.cols(); ++c) {
                 // TODO: need to pass in a visited 2D array to avoid double visiting
-                this.combination(board, r, c, new StringBuilder(), combinations);
+                visited = new boolean[board.rows()][board.cols()];
+                this.combination(board, r, c, new StringBuilder(), visited, combinations);
             }
         }
 
@@ -44,8 +46,12 @@ public class BoggleSolver {
         return combinations;
     }
 
-    private void combination(BoggleBoard board, int curRow, int curCol, StringBuilder soFar, Set<String> results) {
-        if (curRow < 0 || curRow >= board.rows() || curCol < 0 || curCol >= board.cols()) {
+    private void combination(BoggleBoard board, int curRow, int curCol, StringBuilder soFar,
+                             boolean[][] visited, Set<String> results) {
+        if (curRow < 0 || curRow >= board.rows()
+                || curCol < 0 || curCol >= board.cols()
+                || visited[curRow][curCol]
+        ) {
             return;
         }
 
@@ -53,22 +59,23 @@ public class BoggleSolver {
         char curChar = board.getLetter(curRow, curCol);
         // append char in-place
         soFar.append(curChar);
+        visited[curRow][curCol] = true;
 
         if (soFar.length() > 1) {
             results.add(soFar.toString());
         }
 
         // left, curCol - 1
-        this.combination(board, curRow, curCol - 1, soFar, results);
+        this.combination(board, curRow, curCol - 1, soFar, visited, results);
 
         // right, curCol + 1
-        this.combination(board, curRow, curCol + 1, soFar, results);
+        this.combination(board, curRow, curCol + 1, soFar, visited, results);
 
         // up, curRow - 1
-        this.combination(board, curRow - 1, curCol, soFar, results);
+        this.combination(board, curRow - 1, curCol, soFar, visited, results);
 
         // down, curRow + 1
-        this.combination(board, curRow + 1, curCol, soFar, results);
+        this.combination(board, curRow + 1, curCol, soFar, visited, results);
     }
 
     // Returns the score of the given word if it is in the dictionary, zero otherwise.
