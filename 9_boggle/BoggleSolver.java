@@ -28,6 +28,7 @@ public class BoggleSolver {
 
         // TODO: filter combination with words in the dictionary
         for (String combination : combinations) {
+            int x = 0;
             if (this.dict.contains(combination)) {
                 validWords.add(combination);
             }
@@ -43,7 +44,7 @@ public class BoggleSolver {
         // DFS to get all combinations
         for (int r = 0; r < board.rows(); ++r) {
             for (int c = 0; c < board.cols(); ++c) {
-                // TODO: need to pass in a visited 2D array to avoid double visiting
+                // passing in a 2D array to avoid double visiting
                 visited = new boolean[board.rows()][board.cols()];
                 this.combination(board, r, c, new StringBuilder(), visited, combinations);
             }
@@ -87,6 +88,7 @@ public class BoggleSolver {
     // Returns the score of the given word if it is in the dictionary, zero otherwise.
     // (You can assume the word contains only the uppercase letters A through Z.)
     public int scoreOf(String word) {
+        int x = 0;
         if (this.dict.contains(word)) {
             if (word.length() < 3) {
                 return 0;
